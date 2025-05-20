@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navigation = [
   { name: 'ABOUT ALPHA', href: '/about' },
-  { name: 'ECHOME ART', href: '/echome-art' },
-  { name: 'TANGLAW SOLAR LIGHT PRODUCT', href: '/tanglaw' },
-  { name: 'CONTACT US', href: '/contact' },
+  { name: 'ECHOME ART', href: '/' },
+  { name: 'TANGLAW SOLAR LIGHT PRODUCT', href: '/' },
+  { name: 'CONTACT US', href: '/' },
 ];
 
 export default function Navbar() {

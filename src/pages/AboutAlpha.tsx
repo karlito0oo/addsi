@@ -55,14 +55,16 @@ export default function AboutAlpha() {
       <section className="w-full bg-white px-4 sm:px-0">
         <div className="max-w-4xl mx-auto pt-12 pb-0 flex flex-col items-center">
           <div className="flex flex-col items-center text-center relative w-full">
+          <div className="flex flex-col items-center text-center relative w-full">
             <div className="w-full flex items-center mb-6 relative">
               <div className="flex-1 border-t border-gray-400" />
-              <h2 className="mx-6 text-5xl sm:text-6xl font-serif italic font-bold text-gray-800 whitespace-nowrap relative text-center">
+              <h2 className="mx-2 sm:mx-6 text-3xl sm:text-5xl md:text-6xl font-serif italic font-bold text-gray-800 relative text-center">
                 Who We Are
-                <span className="absolute -right-12 bottom-0 text-3xl">&rarr;</span>
+                <span className="hidden sm:inline absolute -right-12 bottom-0 text-3xl">&rarr;</span>
               </h2>
               <div className="flex-1 border-t border-gray-400" />
             </div>
+          </div>
             <div className="text-lg sm:text-xl text-gray-800 mb-4 font-medium text-center">100% Filipino-owned corporation established in the year 2007</div>
             <div className="text-base sm:text-lg text-gray-700 mb-8 max-w-3xl text-center">
               We create and implement innovative cause-oriented projects, products, and programs that highlight the Filipino spirit of creativity, ingenuity, and values through synergies with the public and private sector, NGOs and other social & civic organizations
@@ -81,9 +83,9 @@ export default function AboutAlpha() {
           <div className="flex flex-col items-center text-center relative w-full">
             <div className="w-full flex items-center mb-6 relative">
               <div className="flex-1 border-t border-gray-400" />
-              <h2 className="mx-6 text-5xl sm:text-6xl font-serif italic font-bold text-gray-800 whitespace-nowrap relative text-center">
+              <h2 className="mx-2 sm:mx-6 text-3xl sm:text-5xl md:text-6xl font-serif italic font-bold text-gray-800 relative text-center">
                 Mission and Vision
-                <span className="absolute -right-12 bottom-0 text-3xl">&rarr;</span>
+                <span className="hidden sm:inline absolute -right-12 bottom-0 text-3xl">&rarr;</span>
               </h2>
               <div className="flex-1 border-t border-gray-400" />
             </div>

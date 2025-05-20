@@ -10,11 +10,7 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={
-              <div className="pt-24 text-center">
-                <h1 className="text-4xl font-bold">Welcome to Alpha</h1>
-              </div>
-            } />
+            <Route path="/" element={<AboutAlpha />} />
             <Route path="/about" element={<AboutAlpha />} />
             <Route path="/echome-art" element={
               <div className="pt-24 text-center">
