@@ -32,96 +32,78 @@ const features = [
 
 export default function AboutAlpha() {
   return (
-    <div className="bg-white pt-24 w-full">
-      <div className="relative isolate overflow-hidden bg-gradient-to-b from-blue-100/20 w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8 pb-24 pt-10 sm:pb-32 lg:flex lg:py-40">
-          <div className="w-full max-w-2xl lg:max-w-xl lg:flex-shrink-0 lg:pt-8 mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                About Alpha
-              </h1>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Content coming soon...
-              </p>
-            </motion.div>
+    <div className="bg-white pt-0 w-full min-h-screen">
+      {/* Hero Section */}
+      <section className="w-full">
+        <div className="bg-green-800 w-full py-6 flex justify-center items-center">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-wide uppercase text-center">Company Profile</h1>
+        </div>
+        <div className="flex flex-col items-center justify-center py-12 mx-auto max-w-2xl">
+          <img src="/shortLogo.png" alt="Alpha Logo" className="h-40 w-auto mb-6 mx-auto" />
+          <h2 className="text-4xl font-extrabold text-red-500 uppercase mb-2 text-center">ALPHA</h2>
+          <div className="text-red-500 font-semibold text-lg tracking-wide uppercase mb-8 text-center">Distinct Development Solutions Inc.</div>
+          <div className="w-full flex flex-col items-center mt-12">
+            <div className="border-t border-green-800 w-40 mb-4" />
+            <div className="text-center text-black font-bold text-base leading-tight">
+              100% Filipino-owned<br />est. 2007
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Stats section */}
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-2xl lg:max-w-none">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Our Impact in Numbers
-            </h2>
-          </div>
-          <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.id}
-                className="flex flex-col bg-gray-400/5 p-8"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: stat.id * 0.1 }}
-              >
-                <dt className="text-sm font-semibold leading-6 text-gray-600">{stat.name}</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">{stat.value}</dd>
-              </motion.div>
-            ))}
-          </dl>
-        </div>
-      </div>
-
-      {/* Features section */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-        <div className="w-full max-w-2xl lg:text-center mx-auto">
-          <h2 className="text-base font-semibold leading-7 text-blue-600">Our Values</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need to know about Alpha
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            We are more than just a lighting company. We are a team of innovators, environmentalists, and visionaries committed to creating a brighter, more sustainable future.
-          </p>
-        </div>
-        <div className="w-full mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none mx-auto">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
-            {features.map((feature) => (
-              <motion.div
-                key={feature.name}
-                className="flex flex-col"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: features.indexOf(feature) * 0.1 }}
-              >
-                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                  <span className="text-2xl">{feature.icon}</span>
-                  {feature.name}
-                </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
-                  <p className="flex-auto">{feature.description}</p>
-                </dd>
-              </motion.div>
-            ))}
-          </dl>
-        </div>
-      </div>
-
-      {/* Mission section */}
-      <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32 w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="w-full max-w-2xl lg:mx-0 mx-auto">
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">Our Mission</h2>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              To revolutionize the lighting industry through sustainable innovation, creating products that not only illuminate spaces but also contribute to a greener, more energy-efficient world. We strive to be at the forefront of solar lighting technology while maintaining the highest standards of quality and customer satisfaction.
-            </p>
+      {/* Who We Are Section */}
+      <section className="w-full bg-white px-4 sm:px-0">
+        <div className="max-w-4xl mx-auto pt-12 pb-0 flex flex-col items-center">
+          <div className="flex flex-col items-center text-center relative w-full">
+            <div className="w-full flex items-center mb-6 relative">
+              <div className="flex-1 border-t border-gray-400" />
+              <h2 className="mx-6 text-5xl sm:text-6xl font-serif italic font-bold text-gray-800 whitespace-nowrap relative text-center">
+                Who We Are
+                <span className="absolute -right-12 bottom-0 text-3xl">&rarr;</span>
+              </h2>
+              <div className="flex-1 border-t border-gray-400" />
+            </div>
+            <div className="text-lg sm:text-xl text-gray-800 mb-4 font-medium text-center">100% Filipino-owned corporation established in the year 2007</div>
+            <div className="text-base sm:text-lg text-gray-700 mb-8 max-w-3xl text-center">
+              We create and implement innovative cause-oriented projects, products, and programs that highlight the Filipino spirit of creativity, ingenuity, and values through synergies with the public and private sector, NGOs and other social & civic organizations
+            </div>
           </div>
         </div>
-      </div>
+        <div className="relative w-full max-w-6xl mx-auto mt-4 mb-0 flex justify-center">
+          <img src="/who-we-are-image.png" alt="Who We Are" className="w-full object-cover rounded-none shadow-md" style={{minHeight:'220px', maxHeight:'320px'}} />
+          <img src="/shortLogo.png" alt="Alpha Logo" className="absolute bottom-4 right-4 h-12 w-auto opacity-80" />
+        </div>
+      </section>
+
+      {/* Mission and Vision Section */}
+      <section className="w-full bg-white px-4 sm:px-0 relative pb-16">
+        <div className="max-w-5xl mx-auto pt-12 pb-0 flex flex-col items-center">
+          <div className="flex flex-col items-center text-center relative w-full">
+            <div className="w-full flex items-center mb-6 relative">
+              <div className="flex-1 border-t border-gray-400" />
+              <h2 className="mx-6 text-5xl sm:text-6xl font-serif italic font-bold text-gray-800 whitespace-nowrap relative text-center">
+                Mission and Vision
+                <span className="absolute -right-12 bottom-0 text-3xl">&rarr;</span>
+              </h2>
+              <div className="flex-1 border-t border-gray-400" />
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mt-8 text-center md:text-left w-full justify-center">
+            <img src="/mission-vision-img.png" alt="Mission and Vision" className="w-full md:w-80 h-64 object-cover rounded shadow-md mx-auto" />
+            <div className="flex-1 text-gray-800 text-lg space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
+              <div>
+                Our mission is to be a leader in creating <span className="font-bold">"PRO-POORTUNITIES"</span> — opportunities that uplift and support underprivileged and marginalized communities
+              </div>
+              <div>
+                ADDSI strive to make a lasting and positive impact on the lives of our people, fostering a culture of inclusivity, growth, and social responsibility. Together, we aim to build a brighter future for all, driven by innovation, compassion, and the shared values that define us as a nation
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="/shortLogo.png" alt="Alpha Logo" className="absolute bottom-4 right-4 h-12 w-auto opacity-80" />
+      </section>
+
+      
     </div>
   );
 } 
