@@ -115,29 +115,13 @@ export default function AboutAlpha() {
           </motion.div>
         </div>
       </section>
-
-      {/* Stats Section */}
-      <section className="bg-gray-50 py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
-          >
-            {stats.map((stat) => (
-              <div key={stat.id} className="bg-white rounded-lg shadow-sm p-6 text-center transform transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-                <dt className="text-base font-medium text-gray-600">{stat.name}</dt>
-                <dd className="mt-2 text-3xl font-extrabold text-green-700">{stat.value}</dd>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* Divider */}
+      <div className="w-full flex justify-center">
+        <div className="h-1 w-40 bg-gradient-to-r from-green-600 via-green-400 to-red-400 rounded-full my-8" />
+      </div>
 
       {/* Who We Are Section */}
-      <section className="w-full bg-white px-4 sm:px-0">
+      <section className="w-full bg-green-50 px-4 sm:px-0">
         <div className="max-w-4xl mx-auto pt-16 pb-0 flex flex-col items-center">
           <motion.div 
             initial="hidden"
@@ -146,16 +130,15 @@ export default function AboutAlpha() {
             variants={fadeIn}
             className="flex flex-col items-center text-center relative w-full"
           >
-            <div className="flex flex-col items-center text-center relative w-full">
-              <div className="w-full flex items-center mb-6 relative">
-                <div className="flex-1 border-t border-gray-400" />
-                <h2 className="mx-2 sm:mx-6 text-3xl sm:text-5xl md:text-6xl font-serif italic font-bold text-gray-800 relative text-center">
-                  Who We Are
-                  <span className="hidden sm:inline absolute -right-12 bottom-0 text-3xl">&rarr;</span>
-                </h2>
-                <div className="flex-1 border-t border-gray-400" />
-              </div>
+          <div className="flex flex-col items-center text-center relative w-full">
+            <div className="w-full flex items-center mb-6 relative">
+              <div className="flex-1 border-t border-gray-400" />
+              <h2 className="mx-2 sm:mx-6 text-3xl sm:text-5xl md:text-6xl font-serif italic font-bold text-gray-800 relative text-center">
+                Who We Are
+              </h2>
+              <div className="flex-1 border-t border-gray-400" />
             </div>
+          </div>
             <div className="text-lg sm:text-xl text-gray-800 mb-4 font-medium text-center">100% Filipino-owned corporation established in the year 2007</div>
             <div className="text-base sm:text-lg text-gray-700 mb-8 max-w-3xl text-center">
               We create and implement innovative cause-oriented projects, products, and programs that highlight the Filipino spirit of creativity, ingenuity, and values through synergies with the public and private sector, NGOs and other social & civic organizations
@@ -175,34 +158,13 @@ export default function AboutAlpha() {
           <img src="/shortLogo.png" alt="Alpha Logo" className="absolute bottom-4 right-4 h-12 w-auto opacity-80" />
         </motion.div>
       </section>
-
-      {/* Features Section */}
-      <section className="bg-gray-50 py-16 my-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Our Core Values</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">What sets us apart and drives our mission forward</p>
-          </div>
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeIn}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {features.map((feature) => (
-              <div key={feature.name} className="bg-white rounded-lg shadow-sm p-6 transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-l-4 hover:border-green-500">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.name}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* Divider */}
+      <div className="w-full flex justify-center">
+        <div className="h-1 w-40 bg-gradient-to-r from-red-400 via-green-400 to-green-600 rounded-full my-8" />
+      </div>
 
       {/* Mission and Vision Section */}
-      <section className="w-full bg-white px-4 sm:px-0 relative pb-16">
+      <section className="w-full bg-amber-50 px-4 sm:px-0 relative pb-16">
         <div className="max-w-5xl mx-auto pt-12 pb-0 flex flex-col items-center">
           <motion.div 
             initial="hidden"
@@ -215,7 +177,6 @@ export default function AboutAlpha() {
               <div className="flex-1 border-t border-gray-400" />
               <h2 className="mx-2 sm:mx-6 text-3xl sm:text-5xl md:text-6xl font-serif italic font-bold text-gray-800 relative text-center">
                 Mission and Vision
-                <span className="hidden sm:inline absolute -right-12 bottom-0 text-3xl">&rarr;</span>
               </h2>
               <div className="flex-1 border-t border-gray-400" />
             </div>
@@ -229,7 +190,7 @@ export default function AboutAlpha() {
           >
             <div className="w-full md:w-80 h-64 overflow-hidden rounded-lg shadow-md">
               <img src="/mission-vision-img.png" alt="Mission and Vision" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
-            </div>
+          </div>
             <div className="flex-1 text-gray-800 text-lg space-y-6 flex flex-col items-center md:items-start text-center md:text-left bg-white p-6 rounded-lg shadow-sm">
               <div>
                 Our mission is to be a leader in creating <span className="font-bold text-green-700">"PRO-POORTUNITIES"</span> — opportunities that uplift and support underprivileged and marginalized communities
@@ -250,15 +211,68 @@ export default function AboutAlpha() {
           className="absolute bottom-4 right-4 h-12 w-auto"
         />
       </section>
+      {/* Divider */}
+      <div className="w-full flex justify-center">
+        <div className="h-1 w-40 bg-gradient-to-r from-green-600 via-green-400 to-red-400 rounded-full my-8" />
+      </div>
+
+      {/* Our Team Section */}
+      <section className="w-full bg-white px-4 sm:px-0 py-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-serif font-bold text-center mb-10">Our Team</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            {/* Team Leader 1 */}
+            <div className="flex flex-col items-center bg-white rounded-lg shadow p-6 border-t-4 border-green-700">
+              <img src="/team1.jpg" alt="Noel Tanada" className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" />
+              <div className="text-green-700 font-bold text-lg text-center leading-tight">NOEL IGNATIUS F. TAÑADA</div>
+              <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">President & CEO</div>
+              <p className="text-gray-700 text-sm text-center">He has a vast experience in the field of Design and has worked with global brands such as Issey Miyake, Charles & Keith, and Triple Lumen. Contributed his expertise to the Filipino design community by mentoring through Europe as a De Saavedra scholar on Shell Traditions, member of the Chamber of Furniture Industries of the Philippines. He holds several patents for innovative and sustainable products registered in many countries, and continuously develops new concepts & technology-based design promotions.</p>
+            </div>
+            {/* Team Leader 2 */}
+            <div className="flex flex-col items-center bg-white rounded-lg shadow p-6 border-t-4 border-green-700">
+              <img src="/team2.jpg" alt="Michelle Bautista-Tanada" className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" />
+              <div className="text-green-700 font-bold text-lg text-center leading-tight">MICHELLE BAUTISTA-TAÑADA</div>
+              <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">Chief Operating Officer</div>
+              <p className="text-gray-700 text-sm text-center">A local and international marketing specialist with over 20 years of experience. Sits on the Board of Advisors of the Achievers Group of Companies. Led wide-ranging experiential and creative initiatives including collaborations with the Life Earth Foundation Inc. as its co-advocacy partner. Co-organizer of “Upcycling as Art.” Co-Founder of Philippine Alliance for Sustainable Solutions (PASS) Foundation. She also champions women empowerment and is a member of the board of Trustees of Women of the Earth Foundation and Ladies For A Cause.</p>
+            </div>
+            {/* Team Leader 3 */}
+            <div className="flex flex-col items-center bg-white rounded-lg shadow p-6 border-t-4 border-green-700">
+              <img src="/team3.jpg" alt="Crystal Dy" className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" />
+              <div className="text-green-700 font-bold text-lg text-center leading-tight">CRYSTAL “MIXY” B. DY</div>
+              <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">Chief Creative Officer</div>
+              <p className="text-gray-700 text-sm text-center">Fashion Designer and Creative Entrepreneur who graduated Magna Cum Laude from Central Saint Martins London. She has advanced her technical skills in sustainable fashion and was selected for several international courses such as Redress Founder Award, Stockholm, and the H&M Foundation. As a Brand Strategist for leading multinational FMCGs, she brings creative direction to inspire the leadership effort. She also serves as Special Project Director of Balikatan Sa Kaunlaran Foundation and principal co-organizer for Life Earth Foundation, heads initiatives that harness design for sustainability, livelihood, and community empowerment.</p>
+            </div>
+          </div>
+          <div className="bg-green-700 text-white font-bold text-sm px-4 py-2 rounded-t-md w-full text-center mb-2">OUR ENVIRONMENT, SCIENCE AND TECHNICAL SUPPORT</div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-white rounded-b-md p-4 shadow">
+            <div className="text-center">
+              <div className="font-semibold">MARISSA A. PAGLICAWAN, PH.D.</div>
+              <div className="text-xs text-gray-600">Science and Technology</div>
+            </div>
+            <div className="text-center">
+              <div className="font-semibold">ENCARNACION N. RARALIO, PH.D., UAP, ENP</div>
+              <div className="text-xs text-gray-600">Environment and Architecture</div>
+            </div>
+            <div className="text-center">
+              <div className="font-semibold">MARICHELLE ANN F. CARREON MM, HD, PHD, PD-SML</div>
+              <div className="text-xs text-gray-600">Livelihood Training</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Divider */}
+      <div className="w-full flex justify-center">
+        <div className="h-1 w-40 bg-gradient-to-r from-green-600 via-green-400 to-red-400 rounded-full my-8" />
+      </div>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-green-700 to-green-600 py-12 text-white">
+      <section className="bg-red-50 py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Join Our Mission</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
             Together, we can make a difference. Partner with us to create innovative solutions for a sustainable future.
           </p>
-          <button className="bg-white text-green-700 px-6 py-3 rounded-md font-medium shadow-sm hover:bg-gray-100 transition-colors duration-300">
+          <button className="bg-green-700 text-white px-6 py-3 rounded-md font-medium shadow-sm hover:bg-green-800 transition-colors duration-300">
             Contact Us Today
           </button>
         </div>

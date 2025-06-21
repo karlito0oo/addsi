@@ -29,7 +29,7 @@ export default function Navbar() {
                 </span>
                 <span className="text-xs text-red-500 font-medium leading-none">
                   Distinct Development Solutions Inc.
-                </span>
+              </span>
               </div>
             </Link>
           </div>
@@ -47,20 +47,20 @@ export default function Navbar() {
             {navigation.map((item) => {
               const isActive = location.pathname === item.href;
               return (
-                <Link
-                  key={item.name}
-                  to={item.href}
+              <Link
+                key={item.name}
+                to={item.href}
                   className={`group relative px-3 py-2 text-sm font-medium leading-6 transition-all duration-300 rounded-md ${
                     isActive 
                       ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
                       : 'text-gray-700 hover:text-green-600'
                   }`}
-                >
-                  {item.name}
+              >
+                {item.name}
                   {!isActive && (
                     <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-green-500 to-red-500 transition-all duration-300 group-hover:w-full" />
                   )}
-                </Link>
+              </Link>
               );
             })}
           </div>
@@ -94,7 +94,7 @@ export default function Navbar() {
                     <span className="text-base font-bold text-gray-900">Alpha</span>
                     <span className="text-xs text-red-500 font-medium leading-none">
                       Distinct Development Solutions Inc.
-                    </span>
+                  </span>
                   </div>
                 </Link>
                 <button
@@ -112,18 +112,18 @@ export default function Navbar() {
                     {navigation.map((item) => {
                       const isActive = location.pathname === item.href;
                       return (
-                        <Link
-                          key={item.name}
-                          to={item.href}
+                      <Link
+                        key={item.name}
+                        to={item.href}
                           className={`block rounded-lg px-3 py-2 text-base font-medium leading-7 transition-all duration-300 ${
                             isActive 
                               ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
                               : 'text-gray-900 hover:bg-gray-50'
                           }`}
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
                       );
                     })}
                   </div>
