@@ -4,7 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navigation = [
-  { name: 'ABOUT ALPHA', href: '/about' },
+  { name: 'ABOUT ALPHA', href: '/' },
+  { name: 'WASTO', href: '/wasto' },
   { name: 'ECHOME ART', href: '/echome-art' },
   { name: 'TANGLAW SOLAR LIGHT', href: '/tanglaw' },
   { name: 'CONTACT US', href: '/contact' },
@@ -24,10 +25,10 @@ export default function Navbar() {
               <span className="sr-only">Alpha Distinct Development Solutions Inc.</span>
               <img className="h-12 w-auto" src="/shortLogo.png" alt="Alpha Logo" />
               <div className="hidden sm:flex flex-col">
-                <span className="text-lg font-bold text-gray-900">
+                <span className="text-lg font-bold text-green-800">
                   Alpha
                 </span>
-                <span className="text-xs text-red-500 font-medium leading-none">
+                <span className="text-xs text-green-800 font-medium leading-none">
                   Distinct Development Solutions Inc.
               </span>
               </div>

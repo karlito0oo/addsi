@@ -3,11 +3,10 @@ import WhoWeAreSection from '../sections/WhoWeAreSection';
 import MissionVisionSection from '../sections/MissionVisionSection';
 import OurTeamSection from '../sections/OurTeamSection';
 import PartnersAffiliationsSection from '../sections/PartnersAffiliationsSection';
-import CallToActionSection from '../sections/CallToActionSection';
 import BackToTopButton from '../sections/BackToTopButton';
 import SectionDivider from '../sections/SectionDivider';
 import AlphaDDSINewNormSection from '../sections/AlphaDDSINewNormSection';
-import OurServicesSection from '../sections/OurServicesSection';
+import ServicesAndWastoSection from '../sections/ServicesAndWastoSection';
 import { useState, useEffect } from 'react';
 
 export default function AboutAlpha() {
@@ -45,8 +44,7 @@ export default function AboutAlpha() {
       <PartnersAffiliationsSection />
       <SectionDivider />
       <AlphaDDSINewNormSection />
-      <OurServicesSection />
-      <CallToActionSection />
+      <ServicesAndWastoSection />
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </div>
   );

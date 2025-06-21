@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 
 const navigation = {
   main: [
-    { name: 'About Alpha', href: '/about' },
+    { name: 'About Alpha', href: '/' },
+    { name: 'Wasto', href: '/wasto' },
     { name: 'Echome Art', href: '/echome-art' },
     { name: 'Tanglaw Solar Light Product', href: '/tanglaw' },
     { name: 'Contact Us', href: '/contact' },
