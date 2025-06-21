@@ -6,6 +6,7 @@ import PartnersAffiliationsSection from '../sections/PartnersAffiliationsSection
 import CallToActionSection from '../sections/CallToActionSection';
 import BackToTopButton from '../sections/BackToTopButton';
 import SectionDivider from '../sections/SectionDivider';
+import AlphaDDSINewNormSection from '../sections/AlphaDDSINewNormSection';
 import { useState, useEffect } from 'react';
 
 export default function AboutAlpha() {
@@ -42,6 +43,7 @@ export default function AboutAlpha() {
       <SectionDivider />
       <PartnersAffiliationsSection />
       <SectionDivider />
+      <AlphaDDSINewNormSection />
       <CallToActionSection />
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </div>
