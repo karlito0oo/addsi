@@ -44,6 +44,7 @@ export default function AboutAlpha() {
       <PartnersAffiliationsSection />
       <SectionDivider />
       <AlphaDDSINewNormSection />
+      <SectionDivider />
       <ServicesAndWastoSection />
       <BackToTopButton show={showBackToTop} onClick={scrollToTop} />
     </div>

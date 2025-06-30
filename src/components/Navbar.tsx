@@ -92,8 +92,8 @@ export default function Navbar() {
                   <span className="sr-only">Alpha Distinct Development Solutions Inc.</span>
                   <img className="h-10 w-auto" src="/shortLogo.png" alt="Alpha Logo" />
                   <div className="flex flex-col">
-                    <span className="text-base font-bold text-gray-900">Alpha</span>
-                    <span className="text-xs text-red-500 font-medium leading-none">
+                    <span className="text-base font-bold text-green-800">Alpha</span>
+                    <span className="text-xs text-green-800 font-medium leading-none">
                       Distinct Development Solutions Inc.
                   </span>
                   </div>
