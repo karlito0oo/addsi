@@ -7,7 +7,6 @@ const navigation = [
   { name: 'ABOUT ALPHA', href: '/', disabled: false },
   { name: 'WASTO', href: '/wasto', disabled: true },
   { name: 'ECHOME ART', href: '/echome-art', disabled: true },
-  { name: 'TANGLAW SOLAR LIGHT', href: '/tanglaw', disabled: true },
   { name: 'CONTACT US', href: '/contact', disabled: false },
 ];
 
