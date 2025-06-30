@@ -35,7 +35,6 @@ export default function PartnersAffiliationsSection() {
     'images/p_5.png', 'images/p_6.png', 'images/p_7.png', 'images/p_8.png',
     'images/p_9.png', 'images/p_10.png', 'images/p_11.png', 'images/p_12.png'
   ];
-  const poweredBy = ['images/pb_1.png'];
 
   return (
     <section
@@ -118,7 +117,7 @@ export default function PartnersAffiliationsSection() {
                 <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
-                  src="/images/partner-main.jpg" 
+                  src="/images/PORMs.png" 
                   alt="Main Partner" 
                   className="w-40 max-w-full object-contain mb-2" 
                 />
