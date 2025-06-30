@@ -60,10 +60,10 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
       className="bg-white rounded-lg shadow-lg overflow-hidden h-full"
     >
       <div 
@@ -73,18 +73,20 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
         onMouseLeave={() => setIsHovered(false)}
       >
         <motion.img
+          initial={{ scale: 1 }}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
           src={image}
           alt={title}
           className="w-full h-full object-cover"
         />
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {isHovered && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white"
             >
               <svg 
@@ -149,12 +151,18 @@ export default function WastoAchievementsSection() {
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50"
+    >
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mb-12"
         >
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
@@ -165,7 +173,12 @@ export default function WastoAchievementsSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
           {achievements.map((achievement, index) => (
             <AchievementCard
               key={index}
@@ -173,7 +186,7 @@ export default function WastoAchievementsSection() {
               onImageClick={() => setSelectedImage({ image: achievement.image, title: achievement.title })}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <ImageModal
@@ -182,6 +195,6 @@ export default function WastoAchievementsSection() {
         image={selectedImage?.image || ''}
         title={selectedImage?.title || ''}
       />
-    </section>
+    </motion.section>
   );
 } 

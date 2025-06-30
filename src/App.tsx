@@ -4,10 +4,12 @@ import Footer from './components/Footer';
 import AboutAlpha from './pages/AboutAlpha';
 import WastoPage from './pages/WastoPage';
 import ContactPage from './pages/ContactPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">

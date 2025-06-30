@@ -10,7 +10,7 @@ interface ImageModalProps {
 
 const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }) => {
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -60,10 +60,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) 
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
         className="bg-white rounded-lg shadow-lg overflow-hidden h-full"
       >
         <div 
@@ -73,18 +73,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) 
           onMouseLeave={() => setIsHovered(false)}
         >
           <motion.img
+            initial={{ scale: 1 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
             src={image}
             alt={title}
             className="w-full h-full object-cover"
           />
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {isHovered && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white"
               >
                 <svg 

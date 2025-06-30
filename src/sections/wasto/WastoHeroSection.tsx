@@ -26,14 +26,7 @@ export default function WastoHeroSection() {
         </div>
         {/* Arrow and Tagline */}
         <div className="flex-1 flex flex-col items-center md:items-end text-center md:text-right">
-          <motion.div
-            className="hidden md:block text-4xl text-gray-700 mb-2"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            &rarr;
-          </motion.div>
+          
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -46,14 +39,7 @@ export default function WastoHeroSection() {
           </motion.div>
         </div>
         {/* Arrow for mobile (between logo and tagline) */}
-        <motion.div
-          className="block md:hidden text-3xl text-gray-700 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          &darr;
-        </motion.div>
+       
         {/* Alpha logo bottom right */}
         <img src="/images/shortLogo.png" alt="Alpha Logo" className="w-10 h-10 absolute bottom-4 right-4 opacity-80" />
       </div>

@@ -4,8 +4,6 @@ const navigation = {
   main: [
     { name: 'About Alpha', href: '/' },
     { name: 'Wasto', href: '/wasto' },
-    { name: 'Echome Art', href: '/echome-art' },
-    { name: 'Tanglaw Solar Light Product', href: '/tanglaw' },
     { name: 'Contact Us', href: '/contact' },
   ],
   social: [
