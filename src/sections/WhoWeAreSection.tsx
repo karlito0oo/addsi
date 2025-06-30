@@ -72,7 +72,7 @@ export default function WhoWeAreSection() {
           <motion.img 
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.5 }}
-            src="/who-we-are-image.png" 
+            src="/images/who-we-are-image.png" 
             alt="Who We Are" 
             className="w-full object-cover rounded-xl" 
             style={{minHeight:'220px', maxHeight:'320px'}} 
@@ -84,7 +84,7 @@ export default function WhoWeAreSection() {
           whileHover={{ scale: 1.1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.3 }}
-          src="/shortLogo.png" 
+          src="/images/shortLogo.png" 
           alt="Alpha Logo" 
           className="absolute bottom-4 right-4 h-12 w-auto" 
         />

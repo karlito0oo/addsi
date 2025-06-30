@@ -22,10 +22,20 @@ const itemVariants = {
 };
 
 export default function PartnersAffiliationsSection() {
-  const governmentPartners = ['g_1.png', 'g_2.png', 'g_3.png', 'g_4.png', 'g_5.png', 'g_6.png'];
-  const nonGovernmentPartners = ['ng_1.png', 'ng_2.png', 'ng_3.png', 'ng_4.png', 'ng_5.png', 'ng_6.png', 'ng_7.png', 'ng_8.png'];
-  const privateAndCircularityAffiliates = ['p_1.png', 'p_2.png', 'p_3.png', 'p_4.png', 'p_5.png', 'p_6.png', 'p_7.png', 'p_8.png', 'p_9.png', 'p_10.png', 'p_11.png', 'p_12.png'];
-  const poweredBy = ['pb_1.png'];
+  const governmentPartners = [
+    'images/g_1.png', 'images/g_2.png', 'images/g_3.png', 
+    'images/g_4.png', 'images/g_5.png', 'images/g_6.png'
+  ];
+  const nonGovernmentPartners = [
+    'images/ng_1.png', 'images/ng_2.png', 'images/ng_3.png', 'images/ng_4.png',
+    'images/ng_5.png', 'images/ng_6.png', 'images/ng_7.png', 'images/ng_8.png'
+  ];
+  const privateAndCircularityAffiliates = [
+    'images/p_1.png', 'images/p_2.png', 'images/p_3.png', 'images/p_4.png',
+    'images/p_5.png', 'images/p_6.png', 'images/p_7.png', 'images/p_8.png',
+    'images/p_9.png', 'images/p_10.png', 'images/p_11.png', 'images/p_12.png'
+  ];
+  const poweredBy = ['images/pb_1.png'];
 
   return (
     <section
@@ -66,7 +76,7 @@ export default function PartnersAffiliationsSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src="/shortLogo.png" 
+              src="/images/shortLogo.png" 
               alt="Alpha Logo" 
               className="w-28 h-28 object-contain mb-2" 
             />
@@ -108,7 +118,7 @@ export default function PartnersAffiliationsSection() {
                 <motion.img 
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
-                  src="/partner-main.jpg" 
+                  src="/images/partner-main.jpg" 
                   alt="Main Partner" 
                   className="w-40 max-w-full object-contain mb-2" 
                 />
@@ -155,7 +165,7 @@ export default function PartnersAffiliationsSection() {
             transition={{ duration: 0.3 }}
             className="flex gap-2 flex-wrap justify-center sm:justify-start"
           >
-            <img src="/pb_1.png" alt="Powered by 1" className="w-12 h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" />
+            <img src="/images/pb_1.png" alt="Powered by 1" className="w-12 h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" />
           </motion.div>
         </motion.div>
 

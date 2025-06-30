@@ -19,7 +19,7 @@ export default function HeroSection() {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <img src="/shortLogo.png" alt="Alpha Logo" className="h-40 w-auto mb-6 mx-auto drop-shadow-md" />
+          <img src="/images/shortLogo.png" alt="Alpha Logo" className="h-40 w-auto mb-6 mx-auto drop-shadow-md" />
         </motion.div>
         <motion.h2 
           initial={{ opacity: 0 }}

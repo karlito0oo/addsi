@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navigation = [
   { name: 'ABOUT ALPHA', href: '/', disabled: false },
   { name: 'WASTO', href: '/wasto', disabled: true },
-  { name: 'ECHOME ART', href: '/echome-art', disabled: true },
+  //{ name: 'ECHOME ART', href: '/echome-art', disabled: true },
   { name: 'CONTACT US', href: '/contact', disabled: false },
 ];
 
@@ -69,7 +69,7 @@ export default function Navbar() {
           <div className="flex lg:flex-1 items-center gap-3">
             <Link to="/" className="flex items-center gap-3 transition-all duration-300 hover:scale-105">
               <span className="sr-only">Alpha Distinct Development Solutions Inc.</span>
-              <img className="h-12 w-auto" src="/shortLogo.png" alt="Alpha Logo" />
+              <img className="h-12 w-auto" src="/images/shortLogo.png" alt="Alpha Logo" />
               <div className="hidden sm:flex flex-col">
                 <span className="text-lg font-bold text-green-800">
                   Alpha
@@ -120,7 +120,7 @@ export default function Navbar() {
               <div className="flex items-center justify-between mb-6">
                 <Link to="/" className="flex items-center gap-2 transition-transform hover:scale-105">
                   <span className="sr-only">Alpha Distinct Development Solutions Inc.</span>
-                  <img className="h-10 w-auto" src="/shortLogo.png" alt="Alpha Logo" />
+                  <img className="h-10 w-auto" src="/images/shortLogo.png" alt="Alpha Logo" />
                   <div className="flex flex-col">
                     <span className="text-base font-bold text-green-800">Alpha</span>
                     <span className="text-xs text-green-800 font-medium leading-none">

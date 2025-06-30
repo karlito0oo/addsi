@@ -15,7 +15,7 @@ export default function WastoHeroSection() {
         {/* Left: Logo and Title */}
         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mb-8 md:mb-0">
           <motion.img
-            src="/wastoLogo.png"
+            src="/images/wastoLogo.png"
             alt="Wasto Logo"
             className="w-48 sm:w-64 h-auto mb-2 mx-auto md:mx-0"
             initial={{ opacity: 0, y: -20 }}
@@ -55,7 +55,7 @@ export default function WastoHeroSection() {
           &darr;
         </motion.div>
         {/* Alpha logo bottom right */}
-        <img src="/shortLogo.png" alt="Alpha Logo" className="w-10 h-10 absolute bottom-4 right-4 opacity-80" />
+        <img src="/images/shortLogo.png" alt="Alpha Logo" className="w-10 h-10 absolute bottom-4 right-4 opacity-80" />
       </div>
     </section>
   );

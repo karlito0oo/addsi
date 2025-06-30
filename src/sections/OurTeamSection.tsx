@@ -59,7 +59,7 @@ export default function OurTeamSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src="/team1.jpg" 
+              src="/images/team1.jpg" 
               alt="Noel Tanada" 
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" 
             />
@@ -76,7 +76,7 @@ export default function OurTeamSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src="/team2.jpg" 
+              src="/images/team2.jpg" 
               alt="Michelle Bautista-Tanada" 
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" 
             />
@@ -93,7 +93,7 @@ export default function OurTeamSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src="/team3.jpg" 
+              src="/images/team3.jpg" 
               alt="Crystal Dy" 
               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200" 
             />

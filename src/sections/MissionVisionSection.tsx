@@ -51,8 +51,8 @@ export default function MissionVisionSection() {
           >
             <motion.img 
               whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-              src="/mission-vision-img.png" 
+              transition={{ duration: 0.3 }}
+              src="/images/mission-vision-img.png" 
               alt="Mission and Vision" 
               className="w-full h-full object-cover rounded-xl" 
             />
@@ -89,7 +89,7 @@ export default function MissionVisionSection() {
         whileHover={{ scale: 1.1, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        src="/shortLogo.png" 
+        src="/images/shortLogo.png" 
         alt="Alpha Logo" 
         className="absolute bottom-4 right-4 h-12 w-auto"
       />
