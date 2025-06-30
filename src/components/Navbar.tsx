@@ -4,16 +4,63 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navigation = [
-  { name: 'ABOUT ALPHA', href: '/' },
-  { name: 'WASTO', href: '/wasto' },
-  { name: 'ECHOME ART', href: '/echome-art' },
-  { name: 'TANGLAW SOLAR LIGHT', href: '/tanglaw' },
-  { name: 'CONTACT US', href: '/contact' },
+  { name: 'ABOUT ALPHA', href: '/', disabled: false },
+  { name: 'WASTO', href: '/wasto', disabled: true },
+  { name: 'ECHOME ART', href: '/echome-art', disabled: true },
+  { name: 'TANGLAW SOLAR LIGHT', href: '/tanglaw', disabled: true },
+  { name: 'CONTACT US', href: '/contact', disabled: false },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  const NavLink = ({ item, isMobile = false }: { item: typeof navigation[0], isMobile?: boolean }) => {
+    const isActive = location.pathname === item.href;
+
+    if (item.disabled) {
+      return (
+        <span
+          className={`cursor-not-allowed ${
+            isMobile
+              ? 'block rounded-lg px-3 py-2 text-base font-medium leading-7 text-gray-400 bg-gray-50'
+              : 'group relative px-3 py-2 text-sm font-medium leading-6 text-gray-400'
+          }`}
+          title="Coming Soon"
+        >
+          {item.name}
+          {!isMobile && (
+            <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-gray-200" />
+          )}
+        </span>
+      );
+    }
+
+    return (
+      <Link
+        to={item.href}
+        className={`${
+          isMobile
+            ? `block rounded-lg px-3 py-2 text-base font-medium leading-7 transition-all duration-300 ${
+                isActive 
+                  ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
+                  : 'text-gray-900 hover:bg-gray-50'
+              }`
+            : `group relative px-3 py-2 text-sm font-medium leading-6 transition-all duration-300 rounded-md ${
+                isActive 
+                  ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
+                  : 'text-gray-700 hover:text-green-600'
+              }`
+        }`}
+        onClick={isMobile ? () => setMobileMenuOpen(false) : undefined}
+      >
+        {item.name}
+        {!isMobile && !isActive && (
+          <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-green-500 to-red-500 transition-all duration-300 group-hover:w-full" />
+        )}
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -30,7 +77,7 @@ export default function Navbar() {
                 </span>
                 <span className="text-xs text-green-800 font-medium leading-none">
                   Distinct Development Solutions Inc.
-              </span>
+                </span>
               </div>
             </Link>
           </div>
@@ -45,25 +92,9 @@ export default function Navbar() {
             </button>
           </div>
           <div className="hidden lg:flex lg:gap-x-8">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href;
-              return (
-              <Link
-                key={item.name}
-                to={item.href}
-                  className={`group relative px-3 py-2 text-sm font-medium leading-6 transition-all duration-300 rounded-md ${
-                    isActive 
-                      ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
-                      : 'text-gray-700 hover:text-green-600'
-                  }`}
-              >
-                {item.name}
-                  {!isActive && (
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-green-500 to-red-500 transition-all duration-300 group-hover:w-full" />
-                  )}
-              </Link>
-              );
-            })}
+            {navigation.map((item) => (
+              <NavLink key={item.name} item={item} />
+            ))}
           </div>
         </nav>
       </header>
@@ -95,7 +126,7 @@ export default function Navbar() {
                     <span className="text-base font-bold text-green-800">Alpha</span>
                     <span className="text-xs text-green-800 font-medium leading-none">
                       Distinct Development Solutions Inc.
-                  </span>
+                    </span>
                   </div>
                 </Link>
                 <button
@@ -110,23 +141,9 @@ export default function Navbar() {
               <div className="mt-2 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    {navigation.map((item) => {
-                      const isActive = location.pathname === item.href;
-                      return (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                          className={`block rounded-lg px-3 py-2 text-base font-medium leading-7 transition-all duration-300 ${
-                            isActive 
-                              ? 'text-white bg-gradient-to-r from-green-600 to-green-700' 
-                              : 'text-gray-900 hover:bg-gray-50'
-                          }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                      );
-                    })}
+                    {navigation.map((item) => (
+                      <NavLink key={item.name} item={item} isMobile={true} />
+                    ))}
                   </div>
                 </div>
               </div>
