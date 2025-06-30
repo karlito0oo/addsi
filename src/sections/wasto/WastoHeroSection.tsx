@@ -5,7 +5,7 @@ export default function WastoHeroSection() {
     <section
       className="w-full pt-20 pb-8 sm:pb-16 relative"
       style={{
-        backgroundImage: 'url(/background1.jpg)',
+        backgroundImage: 'url(/images/background1.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

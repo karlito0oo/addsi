@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navigation = [
   { name: 'ABOUT ALPHA', href: '/', disabled: false },
-  { name: 'WASTO', href: '/wasto', disabled: true },
+  { name: 'WASTO', href: '/wasto', disabled: false },
   //{ name: 'ECHOME ART', href: '/echome-art', disabled: true },
   { name: 'CONTACT US', href: '/contact', disabled: false },
 ];
