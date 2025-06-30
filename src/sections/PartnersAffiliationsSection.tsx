@@ -1,4 +1,8 @@
 export default function PartnersAffiliationsSection() {
+  const governmentPartners = ['g_1.png', 'g_2.png', 'g_3.png', 'g_4.png', 'g_5.png', 'g_6.png'];
+  const nonGovernmentPartners = ['ng_1.png', 'ng_2.png', 'ng_3.png', 'ng_4.png', 'ng_5.png', 'ng_6.png', 'ng_7.png', 'ng_8.png'];
+  const privateAndCircularityAffiliates = ['p_1.png', 'p_2.png', 'p_3.png', 'p_4.png', 'p_5.png', 'p_6.png', 'p_7.png', 'p_8.png', 'p_9.png', 'p_10.png', 'p_11.png', 'p_12.png'];
+  const poweredBy = ['pb_1.png'];
   return (
     <section
       className="w-full relative py-12 px-2 sm:px-0"
@@ -26,8 +30,8 @@ export default function PartnersAffiliationsSection() {
               <div>
                 <div className="font-semibold text-gray-700 text-sm mb-2">Government</div>
                 <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                  {[1,2,3,4,5,6].map(i => (
-                    <img key={i} src={`/partner-gov${i}.jpg`} alt={`Government Partner ${i}`} className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow" />
+                  {governmentPartners.map((img_url, index) => (
+                    <img key={index } src={`/${img_url}`} alt={`Government Partner ${index}`} className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow" />
                   ))}
                 </div>
               </div>
@@ -40,8 +44,8 @@ export default function PartnersAffiliationsSection() {
             <div className="mt-6">
               <div className="font-semibold text-gray-700 text-sm mb-2">Non-Government</div>
               <div className="flex flex-wrap gap-2 justify-center">
-                {[1,2,3,4,5,6,7,8].map(i => (
-                  <img key={i} src={`/partner-non-gov${i}.jpg`} alt={`Non-Government Partner ${i}`} className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow" />
+                {nonGovernmentPartners.map((img_url, index) => (
+                  <img key={index} src={`/${img_url}`} alt={`Non-Government Partner ${index}`} className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow" />
                 ))}
               </div>
             </div>
@@ -51,15 +55,14 @@ export default function PartnersAffiliationsSection() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-6">
           <div className="text-xs text-gray-700 font-semibold text-right">POWERED BY:</div>
           <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
-            <img src="/powered1.jpg" alt="Powered by 1" className="w-12 h-12 object-contain rounded bg-white shadow" />
-            <img src="/powered2.jpg" alt="Powered by 2" className="w-12 h-12 object-contain rounded bg-white shadow" />
+            <img src="/pb_1.png" alt="Powered by 1" className="w-12 h-12 object-contain rounded bg-white shadow" />
           </div>
         </div>
         {/* Private and Circularity Affiliates */}
         <div className="bg-green-700 text-white font-bold text-xs px-4 py-2 rounded-t-md w-full text-center mb-2">Private and Circularity Affiliates</div>
         <div className="flex flex-wrap gap-3 bg-white rounded-b-md p-4 shadow justify-center items-center">
-          {[1,2,3,4,5,6,7,8,9,10,11,12].map(i => (
-            <img key={i} src={`/affiliate${i}.jpg`} alt={`Affiliate ${i}`} className="w-16 h-10 object-contain rounded bg-white shadow" />
+          {privateAndCircularityAffiliates.map((img_url, index) => (
+            <img key={index} src={`/${img_url}`} alt={`Affiliate ${index}`} className="w-16 h-10 object-contain rounded bg-white shadow" />
           ))}
         </div>
       </div>
