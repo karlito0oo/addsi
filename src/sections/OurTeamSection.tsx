@@ -65,7 +65,15 @@ export default function OurTeamSection() {
             />
             <div className="text-green-700 font-bold text-lg text-center leading-tight">NOEL IGNATIUS F. TAÑADA</div>
             <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">President & CEO</div>
-            <p className="text-gray-700 text-sm text-center">He has a vast experience in the field of Design and has worked with global brands such as Issey Miyake, Charles & Keith, and Triple Lumen. Contributed his expertise to the Filipino design community by mentoring through Europe as a De Saavedra scholar on Shell Traditions, member of the Chamber of Furniture Industries of the Philippines. He holds several patents for innovative and sustainable products registered in many countries, and continuously develops new concepts & technology-based design promotions.</p>
+            <p className="text-gray-700 text-sm text-center">He has a vast experience in the Field of Design and has worked with
+ global brands such as Ethan Allen, Crate & Barrel, and Ralph Lauren.
+ Contributed his expertise to the Filipino design community by
+ teaching Furniture Design at De La Salle–College of Saint Benilde,
+ and has served as Vice President for Education and Board of Trustee
+ member of the Chamber of Furniture Industries of the Philippines.
+ He holds several patents for innovative and sustainable products
+ registered under his name, and continuously develop new science &
+ technology-based climate greenovations.</p>
           </motion.div>
 
           {/* Team Leader 2 */}
@@ -82,7 +90,17 @@ export default function OurTeamSection() {
             />
             <div className="text-green-700 font-bold text-lg text-center leading-tight">MICHELLE BAUTISTA-TAÑADA</div>
             <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">Chief Operating Officer</div>
-            <p className="text-gray-700 text-sm text-center">A local and international marketing specialist with over 20 years of experience. Sits on the Board of Advisors of the Achievers Group of Companies. Led wide-ranging experiential and creative initiatives including collaborations with the Life Earth Foundation Inc. as its co-advocacy partner. Co-organizer of "Upcycling as Art." Co-Founder of Philippine Alliance for Sustainable Solutions (PASS) Foundation. She also champions women empowerment and is a member of the board of Trustees of Women of the Earth Foundation and Ladies For A Cause.</p>
+            <p className="text-gray-700 text-sm text-center"> A local and international marketing specialist with over 20 years of
+ experience in Out-of-Home Brand Activation, she currently serves on
+ the Board of Advisors of the Activasia Group of Companies.
+ Her wide-ranging experiential and creative initiatives include
+ collaborations with the Miss Earth Foundation Inc., as its eco advocacy
+ partner.
+ She advocates “Upcycling “  as Co Founder of Philippine Alliance for
+ Sustainable Solutions (PASS) Foundation.
+ She also champions women empowerment as a member of the Board of
+ Trustees of Balikatan Sa Kaunlaran National Foundation, the National
+ Council of Women of the Philippines, and Ladies For A Cause.</p>
           </motion.div>
 
           {/* Team Leader 3 */}
@@ -99,7 +117,17 @@ export default function OurTeamSection() {
             />
             <div className="text-green-700 font-bold text-lg text-center leading-tight">CRYSTAL "MIXY" B. DY</div>
             <div className="uppercase text-xs font-semibold text-gray-700 mb-2 text-center">Chief Creative Officer</div>
-            <p className="text-gray-700 text-sm text-center">Fashion Designer and Creative Entrepreneur who graduated Magna Cum Laude from Central Saint Martins London. She has advanced her technical skills in sustainable fashion and was selected for several international courses such as Redress Founder Award, Stockholm, and the H&M Foundation. As a Brand Strategist for leading multinational FMCGs, she brings creative direction to inspire the leadership effort. She also serves as Special Project Director of Balikatan Sa Kaunlaran Foundation and principal co-organizer for Life Earth Foundation, heads initiatives that harness design for sustainability, livelihood, and community empowerment.</p>
+            <p className="text-gray-700 text-sm text-center"> Fashion Designer and Creative Entrepreneur who graduated Magna Cum
+ Laude at the Fashion Institute of Technology in New York and advanced
+ her Haute Couture at Central Saint Martins London. She has showcased
+ her collections at multiple seasons of Philippine Fashion Week and
+ worked with international names such as Roberta Einer and Kate Spade.
+ As a Brand Strategist for leading multinational FMCGs, she brings
+ creative direction to large-scale branding efforts.
+ Beyond fashion, she serves as Special Projects Director of Balikatan Sa
+ Kaunlaran National Foundation and creative consultant for Ms. Earth
+ Foundation Inc., leading initiatives that harness design for sustainability,
+ livelihood, and community empowerment.</p>
           </motion.div>
         </motion.div>
 

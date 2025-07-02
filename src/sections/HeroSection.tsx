@@ -3,16 +3,7 @@ import { motion } from 'framer-motion';
 export default function HeroSection() {
   return (
     <section className="w-full pt-20">
-      <div className="bg-gradient-to-r from-green-800 to-green-700 w-full py-8 flex justify-center items-center shadow-md">
-        <motion.h1 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl sm:text-5xl font-extrabold text-white tracking-wide uppercase text-center"
-        >
-          Company Profile
-        </motion.h1>
-      </div>
+      
       <div className="flex flex-col items-center justify-center py-12 mx-auto max-w-2xl px-4 sm:px-0">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
@@ -45,7 +36,7 @@ export default function HeroSection() {
         >
           <div className="border-t border-green-800 w-40 mb-4" />
           <div className="text-center text-black font-bold text-base leading-tight">
-            100% Filipino-owned<br />est. 2007
+          Your Regenerative Sustainability Partner
           </div>
         </motion.div>
       </div>

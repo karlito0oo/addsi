@@ -86,7 +86,7 @@ export default function ContactPage() {
                 <div>
                   <p className="text-sm font-medium text-gray-900">Email</p>
                   <a href="mailto:support@alphadssi.com" className="text-base text-gray-600 hover:text-green-600 transition-colors">
-                    support@alphadssi.com
+                    info@alphadssi.com
                   </a>
                 </div>
               </motion.div>
