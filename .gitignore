@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#api
+api/vendor/*
+api/.env
+api/composer.lock
