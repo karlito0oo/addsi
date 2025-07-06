@@ -12,10 +12,14 @@ interface TeamMember {
   order: number;
 }
 
+interface ValidationErrors {
+  [key: string]: string[];
+}
+
 const TeamManagement: React.FC = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | ValidationErrors>('');
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -58,8 +62,13 @@ const TeamManagement: React.FC = () => {
       fetchTeamMembers();
       setEditingMember(null);
       setImageFile(null);
+      setError('');
     } catch (err: any) {
-      setError(err.message || 'Failed to save team member');
+      if (err.response?.data?.errors) {
+        setError(err.response.data.errors);
+      } else {
+        setError(err.response?.data?.message || err.message || 'Failed to save team member');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -91,9 +100,23 @@ const TeamManagement: React.FC = () => {
         </button>
       </div>
 
-      {error && (
+      {typeof error === 'string' && error && (
         <div className="bg-red-50 border-l-4 border-red-400 p-4">
           <p className="text-red-700">{error}</p>
+        </div>
+      )}
+
+      {typeof error === 'object' && Object.keys(error).length > 0 && (
+        <div className="bg-red-50 border-l-4 border-red-400 p-4">
+          <ul className="list-disc list-inside">
+            {Object.entries(error).map(([field, messages]) => (
+              messages.map((message, index) => (
+                <li key={`${field}-${index}`} className="text-red-700">
+                  {message}
+                </li>
+              ))
+            ))}
+          </ul>
         </div>
       )}
 

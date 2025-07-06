@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->text('bio');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('category', ['leadership', 'support']);
             $table->integer('order')->default(0);
             $table->timestamps();
