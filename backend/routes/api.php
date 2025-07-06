@@ -9,6 +9,7 @@ use App\Http\Controllers\WastoAchievementController;
 use App\Http\Controllers\WastoProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PublicDataController;
+use App\Http\Controllers\ContactController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -19,6 +20,7 @@ Route::get('/wasto-products', [WastoProductController::class, 'index']);
 Route::get('/public-data', [PublicDataController::class, 'index']);
 Route::get('/settings/public', [SettingController::class, 'getPublicSettings']);
 Route::get('/settings', [SettingController::class, 'index']);
+Route::post('/contact', [ContactController::class, 'sendMessage']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {

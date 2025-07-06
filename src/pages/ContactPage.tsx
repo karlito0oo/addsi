@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { usePublicData } from '../contexts/PublicDataContext';
+import { api } from '../services/api';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -36,25 +37,12 @@ export default function ContactPage() {
     setErrorMessage('');
     
     try {
-      const response = await fetch('https://api.alphadds.com/send-email.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send message');
-      }
-
+      const response = await api.post('/contact', formData);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
+    } catch (error: any) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Failed to send message');
+      setErrorMessage(error.response?.data?.error || 'Failed to send message');
     } finally {
       setIsSubmitting(false);
       setTimeout(() => {
@@ -140,7 +128,7 @@ export default function ContactPage() {
                   <p className="text-sm font-medium text-gray-900">Phone</p>
                   <a href={`tel:${companyDetails.company_phone}`} className="text-base text-gray-600 hover:text-green-600 transition-colors">
                     {companyDetails.company_phone}
-                  </a>
+                    </a>
                 </div>
               </motion.div>
 
