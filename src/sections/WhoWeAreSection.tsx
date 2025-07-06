@@ -1,38 +1,23 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { adminService } from '../services/admin.service';
+import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config';
 
-interface WhoWeAreSettings {
-  who_we_are_subtitle: string;
-  who_we_are_description: string;
-  who_we_are_image: string;
-}
-
 export default function WhoWeAreSection() {
-  const [settings, setSettings] = useState<WhoWeAreSettings>({
-    who_we_are_subtitle: '',
-    who_we_are_description: '',
-    who_we_are_image: ''
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    adminService.getSettingsByGroup('who_we_are')
-      .then(data => {
-        setSettings(data as WhoWeAreSettings);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Failed to load who we are settings:', error);
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading, error } = usePublicData();
+  const whoWeAreSettings = data.settings.who_we_are || {};
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <p className="text-red-500">{error}</p>
       </div>
     );
   }
@@ -82,7 +67,7 @@ export default function WhoWeAreSection() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-lg sm:text-xl text-emerald-900 mb-4 font-medium text-center"
           >
-            {settings.who_we_are_subtitle}
+            {whoWeAreSettings.who_we_are_subtitle}
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +75,7 @@ export default function WhoWeAreSection() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-base sm:text-lg text-emerald-800 mb-8 max-w-3xl text-center"
           >
-            {settings.who_we_are_description}
+            {whoWeAreSettings.who_we_are_description}
           </motion.div>
         </motion.div>
       </div>
@@ -105,7 +90,7 @@ export default function WhoWeAreSection() {
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.5 }}
-            src={`${STORAGE_URL}/${settings.who_we_are_image}`}
+            src={`${STORAGE_URL}/${whoWeAreSettings.who_we_are_image}`}
             alt="Who We Are" 
             className="w-full object-cover rounded-xl" 
             style={{minHeight:'220px', maxHeight:'320px'}} 

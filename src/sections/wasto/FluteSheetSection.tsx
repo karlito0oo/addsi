@@ -1,40 +1,11 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { adminService } from '../../services/admin.service';
+import { usePublicData } from '../../contexts/PublicDataContext';
 import { STORAGE_URL } from '../../config';
 
-interface FluteSheetSettings {
-  flute_sheet_description: string;
-  flute_sheet_subtext: string;
-  flute_sheet_benefits: string;
-  flute_sheet_image: string;
-}
-
-const FluteSheetSection = () => {
-  const [settings, setSettings] = useState<FluteSheetSettings>({
-    flute_sheet_description: '',
-    flute_sheet_subtext: '',
-    flute_sheet_benefits: '',
-    flute_sheet_image: ''
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await adminService.getSettingsByGroup('flute_sheet');
-        setSettings(response as FluteSheetSettings);
-      } catch (err) {
-        console.error('Error fetching flute sheet settings:', err);
-        setError('Failed to load content');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+export default function FluteSheetSection() {
+  const { data, loading, error } = usePublicData();
+  const fluteSheetSettings = data.settings.flute_sheet || {};
+  const benefits = fluteSheetSettings.flute_sheet_benefits?.split(',').map(benefit => benefit.trim()) || [];
 
   if (loading) {
     return (
@@ -52,8 +23,6 @@ const FluteSheetSection = () => {
     );
   }
 
-  const benefits = settings.flute_sheet_benefits.split(',').map(benefit => benefit.trim());
-
   return (
     <div className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,13 +30,14 @@ const FluteSheetSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-green-700 mb-6">
             RECYCLABLE FLUTE SHEETS
           </h2>
-          <div className="text-lg text-gray-600 max-w-3xl mx-auto mb-8" dangerouslySetInnerHTML={{ __html: settings.flute_sheet_description }} />
-          <div className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: settings.flute_sheet_subtext }} />
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto mb-8" dangerouslySetInnerHTML={{ __html: fluteSheetSettings.flute_sheet_description }} />
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: fluteSheetSettings.flute_sheet_subtext }} />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
@@ -106,7 +76,7 @@ const FluteSheetSection = () => {
             viewport={{ once: true }}
           >
             <img 
-              src={`${STORAGE_URL}/${settings.flute_sheet_image}`}
+              src={`${STORAGE_URL}/${fluteSheetSettings.flute_sheet_image}`}
               alt="Recyclable Flute Sheets" 
               className="rounded-lg shadow-xl w-full"
             />
@@ -115,6 +85,4 @@ const FluteSheetSection = () => {
       </div>
     </div>
   );
-};
-
-export default FluteSheetSection; 
+} 

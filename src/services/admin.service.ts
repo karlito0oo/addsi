@@ -116,6 +116,14 @@ class AdminService {
     return api.get('/settings', { params });
   }
 
+  async getPublicSettings() {
+    return api.get('/settings/public');
+  }
+
+  async getPublicData() {
+    return api.get('/public-data');
+  }
+
   async getSettingsByGroup(group: string) {
     return this.getSettings(group).then(response => {
       const settings = response.data;

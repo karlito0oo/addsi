@@ -1,37 +1,11 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProductCard from './components/ProductCard';
-import { adminService } from '../../services/admin.service';
+import { usePublicData } from '../../contexts/PublicDataContext';
+import { STORAGE_URL } from '../../config';
 
-interface WastoProduct {
-  id: number;
-  category: string;
-  description: string;
-  image: string;
-  type: string;
-  order: number;
-}
-
-const WastoProductsSection = () => {
-  const [products, setProducts] = useState<WastoProduct[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>('');
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await adminService.getWastoProducts('product');
-        setProducts(response.data);
-      } catch (err) {
-        setError('Failed to load products');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+export default function WastoProductsSection() {
+  const { data, loading, error } = usePublicData();
+  const products = data.wastoProducts?.filter(p => p.type === 'product') || [];
 
   if (loading) {
     return (
@@ -75,18 +49,18 @@ const WastoProductsSection = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              image={`${product.image}`}
-              title={product.category}
-              description={product.description}
-            />
-          ))}
+          {products
+            .sort((a, b) => a.order - b.order)
+            .map((product) => (
+              <ProductCard
+                key={product.id}
+                image={product.image}
+                title={product.category}
+                description={product.description}
+              />
+            ))}
         </motion.div>
       </div>
     </motion.div>
   );
-};
-
-export default WastoProductsSection; 
+} 

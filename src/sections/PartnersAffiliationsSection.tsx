@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { api } from '../services/api';
+import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config';
 
 interface Partner {
@@ -33,25 +32,8 @@ const itemVariants = {
 };
 
 export default function PartnersAffiliationsSection() {
-  const [partners, setPartners] = useState<Partner[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchPartners = async () => {
-      try {
-        const response = await api.get('/partners');
-        setPartners(response.data);
-      } catch (err) {
-        setError('Failed to load partners');
-        console.error('Error fetching partners:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPartners();
-  }, []);
+  const { data, loading: isLoading, error } = usePublicData();
+  const partners = data.partners || [];
 
   return (
     <section

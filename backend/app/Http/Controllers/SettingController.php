@@ -11,13 +11,37 @@ class SettingController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Setting::query();
-        
-        if ($request->has('group')) {
-            $query->where('group', $request->group);
-        }
-        
-        return $query->orderBy('key')->get();
+        $group = $request->query('group');
+        $settings = $group ? Setting::where('group', $group)->get() : Setting::all();
+        return response()->json($settings);
+    }
+
+    public function getPublicSettings()
+    {
+        $cacheKey = 'public_settings';
+        $cacheDuration = 60 * 24; // 24 hours
+
+        return response()->json(
+            cache()->remember($cacheKey, $cacheDuration, function () {
+                $settings = Setting::whereIn('group', [
+                    'who_we_are',
+                    'mission_vision',
+                    'wasto_achievements',
+                    'basic_essentials',
+                    'flute_sheet'
+                ])->get();
+
+                // Group settings by their group
+                $groupedSettings = $settings->groupBy('group')->map(function ($groupSettings) {
+                    return $groupSettings->reduce(function ($acc, $setting) {
+                        $acc[$setting->key] = $setting->value;
+                        return $acc;
+                    }, []);
+                });
+
+                return $groupedSettings;
+            })
+        );
     }
 
     public function update(Request $request, Setting $setting)
@@ -39,21 +63,19 @@ class SettingController extends Controller
 
         $validated = $request->validate($validationRules);
 
-        if ($setting->type === 'image' && $request->hasFile('value')) {
-            // Delete old image
-            if ($setting->value) {
-                Storage::disk('public')->delete($setting->value);
-            }
-            
-            // Store new image
-            $image = $request->file('value');
-            $path = $image->store('settings', 'public');
-            $setting->value = $path;
-        } else {
-            $setting->value = $request->input('value');
+        $data = $request->all();
+        
+        if ($request->hasFile('value')) {
+            $file = $request->file('value');
+            $filename = 'settings/' . $file->getClientOriginalName();
+            $file->storeAs('public', $filename);
+            $data['value'] = $filename;
         }
+        
+        $setting->update($data);
 
-        $setting->save();
+        // Clear the settings cache
+        cache()->forget('public_settings');
 
         return response()->json($setting);
     }

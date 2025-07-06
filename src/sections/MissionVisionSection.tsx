@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { adminService } from '../services/admin.service';
+import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config';
 
 const fadeIn = {
@@ -8,34 +7,22 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
-interface MissionVisionSettings {
-  mission_vision_description: string;
-  mission_vision_image: string;
-}
-
 export default function MissionVisionSection() {
-  const [settings, setSettings] = useState<MissionVisionSettings>({
-    mission_vision_description: '',
-    mission_vision_image: ''
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    adminService.getSettingsByGroup('mission_vision')
-      .then(data => {
-        setSettings(data as MissionVisionSettings);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Failed to load mission vision settings:', error);
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading, error } = usePublicData();
+  const missionVisionSettings = data.settings.mission_vision || {};
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <p className="text-red-500">{error}</p>
       </div>
     );
   }
@@ -86,7 +73,7 @@ export default function MissionVisionSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src={`${STORAGE_URL}/${settings.mission_vision_image}`}
+              src={`${STORAGE_URL}/${missionVisionSettings.mission_vision_image}`}
               alt="Mission and Vision" 
               className="w-full h-full object-cover rounded-xl" 
             />
@@ -106,7 +93,7 @@ export default function MissionVisionSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-amber-100"
             >
-              <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: settings.mission_vision_description }} />
+              <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: missionVisionSettings.mission_vision_description }} />
             </motion.div>
           </motion.div>
         </div>

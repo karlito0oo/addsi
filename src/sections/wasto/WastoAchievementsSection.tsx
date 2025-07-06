@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { adminService } from '../../services/admin.service';
+import { useState } from 'react';
+import { usePublicData } from '../../contexts/PublicDataContext';
 import { STORAGE_URL } from '../../config';
 
 interface Achievement {
@@ -138,33 +138,28 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
 
 export default function WastoAchievementsSection() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
-  const [achievements, setAchievements] = useState<Achievement[]>([]);
-  const [settings, setSettings] = useState<WastoAchievementsSettings>({
-    wasto_achievements_description: ''
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { data, loading, error } = usePublicData();
+  const wastoAchievementsSettings = data.settings.wasto_achievements || {};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [achievementsResponse, settingsResponse] = await Promise.all([
-          adminService.getWastoAchievements(),
-          adminService.getSettingsByGroup('wasto_achievements')
-        ]);
-        setAchievements(achievementsResponse.data);
-        setSettings(settingsResponse as WastoAchievementsSettings);
-        console.log(settingsResponse);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-        setError('Failed to load content');
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (loading) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative">
+            <div className="w-16 h-16 border-4 border-green-200 rounded-full animate-spin border-t-green-700"></div>
+            <div className="w-16 h-16 border-4 border-transparent rounded-full absolute top-0 animate-ping border-t-green-700 opacity-20"></div>
+          </div>
+          <p className="text-green-700 font-medium animate-pulse">Loading achievements...</p>
+        </div>
+      </div>
+    );
+  }
 
-    fetchData();
-  }, []);
+  if (error) {
+    return (
+      <div className="text-center text-red-600 py-8">{error}</div>
+    );
+  }
 
   return (
     <motion.section
@@ -184,45 +179,31 @@ export default function WastoAchievementsSection() {
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
             Our Achievements
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: settings.wasto_achievements_description }} />
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: wastoAchievementsSettings.wasto_achievements_description }} />
         </motion.div>
 
-        {loading ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
-            <div className="flex flex-col items-center gap-4">
-              <div className="relative">
-                <div className="w-16 h-16 border-4 border-green-200 rounded-full animate-spin border-t-green-700"></div>
-                <div className="w-16 h-16 border-4 border-transparent rounded-full absolute top-0 animate-ping border-t-green-700 opacity-20"></div>
-              </div>
-              <p className="text-green-700 font-medium animate-pulse">Loading achievements...</p>
-            </div>
-          </div>
-        ) : error ? (
-          <div className="text-center text-red-600 py-8">{error}</div>
-        ) : (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            {achievements
-              .sort((a, b) => a.order - b.order)
-              .map((achievement) => (
-                <AchievementCard
-                  key={achievement.id}
-                  image={`${STORAGE_URL}/${achievement.image}`}
-                  title={achievement.title}
-                  description={achievement.description}
-                  date={achievement.achievement_date || undefined}
-                  onImageClick={() => setSelectedImage({
-                    image: `${STORAGE_URL}/${achievement.image}`,
-                    title: achievement.title
-                  })}
-                />
-              ))}
-          </motion.div>
-        )}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          {data.wastoAchievements
+            .sort((a, b) => a.order - b.order)
+            .map((achievement) => (
+              <AchievementCard
+                key={achievement.id}
+                image={`${STORAGE_URL}/${achievement.image}`}
+                title={achievement.title}
+                description={achievement.description}
+                date={achievement.achievement_date || undefined}
+                onImageClick={() => setSelectedImage({
+                  image: `${STORAGE_URL}/${achievement.image}`,
+                  title: achievement.title
+                })}
+              />
+            ))}
+        </motion.div>
       </div>
 
       <ImageModal

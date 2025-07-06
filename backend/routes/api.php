@@ -8,6 +8,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\WastoAchievementController;
 use App\Http\Controllers\WastoProductController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PublicDataController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -15,6 +16,8 @@ Route::get('/team-members', [TeamMemberController::class, 'index']);
 Route::get('/partners', [PartnerController::class, 'index']);
 Route::get('/wasto-achievements', [WastoAchievementController::class, 'index']);
 Route::get('/wasto-products', [WastoProductController::class, 'index']);
+Route::get('/public-data', [PublicDataController::class, 'index']);
+Route::get('/settings/public', [SettingController::class, 'getPublicSettings']);
 Route::get('/settings', [SettingController::class, 'index']);
 
 // Protected routes

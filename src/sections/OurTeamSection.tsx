@@ -1,15 +1,12 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { api } from '../services/api';
+import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config/index';
 
 interface TeamMember {
   id: number;
   name: string;
   position: string;
-  bio: string;
   image: string;
-  category: 'leadership' | 'support';
   order: number;
 }
 
@@ -35,25 +32,8 @@ const itemVariants = {
 };
 
 export default function OurTeamSection() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchTeamMembers = async () => {
-      try {
-        const response = await api.get('/team-members');
-        setTeamMembers(response.data);
-      } catch (err) {
-        setError('Failed to load team members');
-        console.error('Error fetching team members:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchTeamMembers();
-  }, []);
+  const { data, loading: isLoading, error } = usePublicData();
+  const teamMembers = data.teamMembers || [];
 
   if (isLoading) {
     return (
