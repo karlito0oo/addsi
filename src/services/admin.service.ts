@@ -1,10 +1,5 @@
 import { api } from './api';
 
-interface AdminResponse {
-  message: string;
-  data?: any;
-}
-
 class AdminService {
   async getTeamMembers() {
     return api.get('/team-members');

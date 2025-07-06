@@ -3,18 +3,6 @@ import { useState } from 'react';
 import { usePublicData } from '../../contexts/PublicDataContext';
 import { STORAGE_URL } from '../../config';
 
-interface Achievement {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  achievement_date: string | null;
-  order: number;
-}
-
-interface WastoAchievementsSettings {
-  wasto_achievements_description: string;
-}
 
 interface ImageModalProps {
   isOpen: boolean;

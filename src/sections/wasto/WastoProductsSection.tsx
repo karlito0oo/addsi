@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import ProductCard from './components/ProductCard';
 import { usePublicData } from '../../contexts/PublicDataContext';
-import { STORAGE_URL } from '../../config';
 
 export default function WastoProductsSection() {
   const { data, loading, error } = usePublicData();

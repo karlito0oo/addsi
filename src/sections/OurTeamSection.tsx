@@ -2,13 +2,6 @@ import { motion } from 'framer-motion';
 import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config/index';
 
-interface TeamMember {
-  id: number;
-  name: string;
-  position: string;
-  image: string;
-  order: number;
-}
 
 const containerVariants = {
   hidden: { opacity: 0 },

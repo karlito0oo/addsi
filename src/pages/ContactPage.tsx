@@ -220,7 +220,7 @@ export default function ContactPage() {
     setErrorMessage('');
     
     try {
-      const response = await api.post('/contact', formData);
+      await api.post('/contact', formData);
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error: any) {

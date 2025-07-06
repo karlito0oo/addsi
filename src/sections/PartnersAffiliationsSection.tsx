@@ -2,13 +2,6 @@ import { motion } from 'framer-motion';
 import { usePublicData } from '../contexts/PublicDataContext';
 import { STORAGE_URL } from '../config';
 
-interface Partner {
-  id: number;
-  name: string;
-  logo: string;
-  category: 'government' | 'nongovernment' | 'private';
-  order: number;
-}
 
 const containerVariants = {
   hidden: { opacity: 0 },
