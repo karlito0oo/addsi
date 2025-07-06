@@ -1,4 +1,15 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { api } from '../services/api';
+import { STORAGE_URL } from '../config';
+
+interface Partner {
+  id: number;
+  name: string;
+  logo: string;
+  category: 'government' | 'nongovernment' | 'private';
+  order: number;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -22,19 +33,25 @@ const itemVariants = {
 };
 
 export default function PartnersAffiliationsSection() {
-  const governmentPartners = [
-    'images/g_1.png', 'images/g_2.png', 'images/g_3.png', 
-    'images/g_4.png', 'images/g_5.png', 'images/g_6.png'
-  ];
-  const nonGovernmentPartners = [
-    'images/ng_1.png', 'images/ng_2.png', 'images/ng_3.png', 'images/ng_4.png',
-    'images/ng_5.png', 'images/ng_6.png', 'images/ng_7.png', 'images/ng_8.png'
-  ];
-  const privateAndCircularityAffiliates = [
-    'images/p_1.png', 'images/p_2.png', 'images/p_3.png', 'images/p_4.png',
-    'images/p_5.png', 'images/p_6.png', 'images/p_7.png', 'images/p_8.png',
-    'images/p_9.png', 'images/p_10.png', 'images/p_11.png', 'images/p_12.png'
-  ];
+  const [partners, setPartners] = useState<Partner[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const response = await api.get('/partners');
+        setPartners(response.data);
+      } catch (err) {
+        setError('Failed to load partners');
+        console.error('Error fetching partners:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPartners();
+  }, []);
 
   return (
     <section
@@ -94,16 +111,20 @@ export default function PartnersAffiliationsSection() {
               >
                 <div className="font-semibold text-gray-700 text-sm mb-2">Government</div>
                 <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-                  {governmentPartners.map((img_url, index) => (
-                    <motion.img 
-                      key={index}
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
-                      src={`/${img_url}`} 
-                      alt={`Government Partner ${index}`} 
-                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
-                    />
-                  ))}
+                  {partners
+                    .filter(partner => partner.category === 'government')
+                    .sort((a, b) => a.order - b.order)
+                    .map((partner) => (
+                      <motion.img 
+                        key={partner.id}
+                        variants={itemVariants}
+                        whileHover={{ scale: 1.1 }}
+                        src={`${STORAGE_URL}/${partner.logo}`} 
+                        alt={partner.name} 
+                        className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
+                        title={partner.name}
+                      />
+                    ))}
                 </div>
               </motion.div>
 
@@ -126,6 +147,7 @@ export default function PartnersAffiliationsSection() {
               </motion.div>
             </div>
 
+            {/* Non-Government Partners */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -135,16 +157,19 @@ export default function PartnersAffiliationsSection() {
             >
               <div className="font-semibold text-gray-700 text-sm mb-2">Non-Government</div>
               <div className="flex flex-wrap gap-2 justify-center">
-                {nonGovernmentPartners.map((img_url, index) => (
-                  <motion.img 
-                    key={index}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.1 }}
-                    src={`/${img_url}`} 
-                    alt={`Non-Government Partner ${index}`} 
-                    className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
-                  />
-                ))}
+                {partners
+                  .filter(partner => partner.category === 'nongovernment')
+                  .sort((a, b) => a.order - b.order)
+                  .map((partner) => (
+                    <motion.img 
+                      key={partner.id}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.1 }}
+                      src={`${STORAGE_URL}/${partner.logo}`} 
+                      alt={partner.name} 
+                      className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
+                    />
+                  ))}
               </div>
             </motion.div>
           </div>
@@ -168,7 +193,7 @@ export default function PartnersAffiliationsSection() {
           </motion.div>
         </motion.div>
 
-        {/* Private and Circularity Affiliates */}
+        {/* Private Partners */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -183,18 +208,33 @@ export default function PartnersAffiliationsSection() {
             viewport={{ once: true }}
             className="flex flex-wrap gap-3 bg-white rounded-b-md p-4 shadow-md justify-center items-center"
           >
-            {privateAndCircularityAffiliates.map((img_url, index) => (
-              <motion.img 
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.1 }}
-                src={`/${img_url}`} 
-                alt={`Affiliate ${index}`} 
-                className="w-16 h-10 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
-              />
-            ))}
+            {partners
+              .filter(partner => partner.category === 'private')
+              .sort((a, b) => a.order - b.order)
+              .map((partner) => (
+                <motion.img 
+                  key={partner.id}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.1 }}
+                  src={`${STORAGE_URL}/${partner.logo}`} 
+                  alt={partner.name} 
+                  className="w-16 h-10 object-contain rounded bg-white shadow-md hover:shadow-lg transition-shadow duration-300" 
+                />
+              ))}
           </motion.div>
         </motion.div>
+
+        {isLoading && (
+          <div className="text-center py-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-700 mx-auto"></div>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-red-600 text-center py-4">
+            {error}
+          </div>
+        )}
       </motion.div>
     </section>
   );

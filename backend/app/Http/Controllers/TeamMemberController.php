@@ -16,16 +16,20 @@ class TeamMemberController extends Controller
 
     public function store(Request $request)
     {
-        $imageRule = $request->category === 'support' ? 'nullable' : 'required|image|max:2048';
-
-        $request->validate([
+        $validationRules = [
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
             'bio' => 'required|string',
             'category' => 'required|in:leadership,support',
             'order' => 'required|integer',
-            'image' => $imageRule,
-        ]);
+        ];
+
+        // Only validate image if it's being uploaded
+        if ($request->hasFile('image')) {
+            $validationRules['image'] = 'image|max:2048';
+        }
+
+        $request->validate($validationRules);
 
         $imagePath = null;
         if ($request->hasFile('image')) {
