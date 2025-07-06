@@ -1,14 +1,58 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { adminService } from '../../services/admin.service';
+import { STORAGE_URL } from '../../config';
+
+interface FluteSheetSettings {
+  flute_sheet_description: string;
+  flute_sheet_subtext: string;
+  flute_sheet_benefits: string;
+  flute_sheet_image: string;
+}
 
 const FluteSheetSection = () => {
-  const benefits = [
-    "Durable",
-    "UV Protected",
-    "Light-weight",
-    "Water-resistant",
-    "100% Recyclable",
-    "Eco-friendly"
-  ];
+  const [settings, setSettings] = useState<FluteSheetSettings>({
+    flute_sheet_description: '',
+    flute_sheet_subtext: '',
+    flute_sheet_benefits: '',
+    flute_sheet_image: ''
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await adminService.getSettingsByGroup('flute_sheet');
+        setSettings(response as FluteSheetSettings);
+      } catch (err) {
+        console.error('Error fetching flute sheet settings:', err);
+        setError('Failed to load content');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  const benefits = settings.flute_sheet_benefits.split(',').map(benefit => benefit.trim());
 
   return (
     <div className="py-16 bg-gray-50">
@@ -22,12 +66,8 @@ const FluteSheetSection = () => {
           <h2 className="text-4xl font-bold text-green-700 mb-6">
             RECYCLABLE FLUTE SHEETS
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            A revolutionary solution for indoor and outdoor printing materials, these flute sheets are designed to be eco-friendly.
-          </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Unlike traditional options that often end up in oceans and landfills, these sheets can be easily repurposed, offering a sustainable alternative.
-          </p>
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto mb-8" dangerouslySetInnerHTML={{ __html: settings.flute_sheet_description }} />
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: settings.flute_sheet_subtext }} />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
@@ -66,7 +106,7 @@ const FluteSheetSection = () => {
             viewport={{ once: true }}
           >
             <img 
-              src="/images/wasto/rfs.png" 
+              src={`${STORAGE_URL}/${settings.flute_sheet_image}`}
               alt="Recyclable Flute Sheets" 
               className="rounded-lg shadow-xl w-full"
             />

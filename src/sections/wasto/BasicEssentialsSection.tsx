@@ -12,25 +12,38 @@ interface WastoProduct {
   order: number;
 }
 
+interface BasicEssentialsSettings {
+  basic_essentials_description: string;
+  basic_essentials_subtext: string;
+}
+
 const BasicEssentialsSection = () => {
   const [products, setProducts] = useState<WastoProduct[]>([]);
+  const [settings, setSettings] = useState<BasicEssentialsSettings>({
+    basic_essentials_description: '',
+    basic_essentials_subtext: ''
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const response = await adminService.getWastoProducts('essential');
-        setProducts(response.data);
+        const [productsResponse, settingsResponse] = await Promise.all([
+          adminService.getWastoProducts('essential'),
+          adminService.getSettingsByGroup('basic_essentials')
+        ]);
+        setProducts(productsResponse.data);
+        setSettings(settingsResponse as BasicEssentialsSettings);
       } catch (err) {
-        setError('Failed to load products');
+        setError('Failed to load content');
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, []);
 
   if (loading) {
@@ -61,12 +74,8 @@ const BasicEssentialsSection = () => {
           <h2 className="text-4xl font-bold text-green-700 mb-6">
             WASTO Basic Essentials
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-4">
-            We are promoting the use of upcycled materials since we use plastics as basics in our daily lives.
-          </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Each purchase contributes to Conservation of Ocean Resources & Aquatic Life (CORAL) and Women on Waste (WOW) program.
-          </p>
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto mb-4" dangerouslySetInnerHTML={{ __html: settings.basic_essentials_description }} />
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: settings.basic_essentials_subtext }} />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

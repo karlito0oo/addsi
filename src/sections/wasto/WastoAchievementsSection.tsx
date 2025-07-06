@@ -12,6 +12,10 @@ interface Achievement {
   order: number;
 }
 
+interface WastoAchievementsSettings {
+  wasto_achievements_description: string;
+}
+
 interface ImageModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -135,23 +139,31 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
 export default function WastoAchievementsSection() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [settings, setSettings] = useState<WastoAchievementsSettings>({
+    wasto_achievements_description: ''
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchAchievements = async () => {
+    const fetchData = async () => {
       try {
-        const response = await adminService.getWastoAchievements();
-        setAchievements(response.data);
+        const [achievementsResponse, settingsResponse] = await Promise.all([
+          adminService.getWastoAchievements(),
+          adminService.getSettingsByGroup('wasto_achievements')
+        ]);
+        setAchievements(achievementsResponse.data);
+        setSettings(settingsResponse as WastoAchievementsSettings);
+        console.log(settingsResponse);
       } catch (err) {
-        console.error('Error fetching achievements:', err);
-        setError('Failed to load achievements');
+        console.error('Error fetching data:', err);
+        setError('Failed to load content');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAchievements();
+    fetchData();
   }, []);
 
   return (
@@ -172,9 +184,7 @@ export default function WastoAchievementsSection() {
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">
             Our Achievements
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Discover our milestones in sustainable waste management and environmental conservation
-          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: settings.wasto_achievements_description }} />
         </motion.div>
 
         {loading ? (

@@ -116,6 +116,16 @@ class AdminService {
     return api.get('/settings', { params });
   }
 
+  async getSettingsByGroup(group: string) {
+    return this.getSettings(group).then(response => {
+      const settings = response.data;
+      return settings.reduce((acc: Record<string, any>, setting: any) => {
+        acc[setting.key] = setting.value;
+        return acc;
+      }, {});
+    });
+  }
+
   async updateSetting(id: number, data: FormData) {
     return api.post(`/admin/settings/${id}`, data, {
       headers: {

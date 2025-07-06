@@ -1,6 +1,42 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { adminService } from '../services/admin.service';
+import { STORAGE_URL } from '../config';
+
+interface WhoWeAreSettings {
+  who_we_are_subtitle: string;
+  who_we_are_description: string;
+  who_we_are_image: string;
+}
 
 export default function WhoWeAreSection() {
+  const [settings, setSettings] = useState<WhoWeAreSettings>({
+    who_we_are_subtitle: '',
+    who_we_are_description: '',
+    who_we_are_image: ''
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    adminService.getSettingsByGroup('who_we_are')
+      .then(data => {
+        setSettings(data as WhoWeAreSettings);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Failed to load who we are settings:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
   return (
     <motion.section 
       initial={{ opacity: 0 }}
@@ -46,7 +82,7 @@ export default function WhoWeAreSection() {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="text-lg sm:text-xl text-emerald-900 mb-4 font-medium text-center"
           >
-            100% Filipino-owned corporation established in the year 2007
+            {settings.who_we_are_subtitle}
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -54,7 +90,7 @@ export default function WhoWeAreSection() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="text-base sm:text-lg text-emerald-800 mb-8 max-w-3xl text-center"
           >
-            We create and implement innovative cause-oriented projects, products, and programs that highlight the Filipino spirit of creativity, ingenuity, and values through synergies with the public and private sector, NGOs and other social & civic organizations
+            {settings.who_we_are_description}
           </motion.div>
         </motion.div>
       </div>
@@ -69,7 +105,7 @@ export default function WhoWeAreSection() {
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.5 }}
-            src="/images/who-we-are-image.png" 
+            src={`${STORAGE_URL}/${settings.who_we_are_image}`}
             alt="Who We Are" 
             className="w-full object-cover rounded-xl" 
             style={{minHeight:'220px', maxHeight:'320px'}} 

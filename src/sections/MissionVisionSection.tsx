@@ -1,11 +1,45 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { adminService } from '../services/admin.service';
+import { STORAGE_URL } from '../config';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
+interface MissionVisionSettings {
+  mission_vision_description: string;
+  mission_vision_image: string;
+}
+
 export default function MissionVisionSection() {
+  const [settings, setSettings] = useState<MissionVisionSettings>({
+    mission_vision_description: '',
+    mission_vision_image: ''
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    adminService.getSettingsByGroup('mission_vision')
+      .then(data => {
+        setSettings(data as MissionVisionSettings);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Failed to load mission vision settings:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-500"></div>
+      </div>
+    );
+  }
+
   return (
     <section className="w-full relative px-4 sm:px-0 pb-16 overflow-hidden">
       {/* Background Pattern */}
@@ -52,7 +86,7 @@ export default function MissionVisionSection() {
             <motion.img 
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              src="/images/mission-vision-img.png" 
+              src={`${STORAGE_URL}/${settings.mission_vision_image}`}
               alt="Mission and Vision" 
               className="w-full h-full object-cover rounded-xl" 
             />
@@ -72,12 +106,7 @@ export default function MissionVisionSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-amber-100"
             >
-              <div className="mb-4">
-                Our mission is to be a leader in creating <span className="font-bold text-amber-700">"PRO-POORTUNITIES"</span> — opportunities that uplift and support underprivileged and marginalized communities
-              </div>
-              <div>
-                ADDSI strive to make a lasting and positive impact on the lives of our people, fostering a culture of inclusivity, growth, and social responsibility. Together, we aim to build a brighter future for all, driven by innovation, compassion, and the shared values that define us as a nation
-              </div>
+              <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: settings.mission_vision_description }} />
             </motion.div>
           </motion.div>
         </div>
