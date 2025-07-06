@@ -53,6 +53,36 @@ class AdminService {
   async deletePartner(id: number) {
     return api.delete(`/partners/${id}`);
   }
+
+  // Wasto Achievements
+  async getWastoAchievements() {
+    return api.get('/wasto-achievements');
+  }
+
+  async createWastoAchievement(formData: FormData) {
+    // Ensure all form fields are present
+    if (!formData.get('title') || !formData.get('description')) {
+      throw new Error('Missing required fields');
+    }
+
+    return api.post('/admin/wasto-achievements', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
+  
+  async updateWastoAchievement(id: number, data: FormData) {
+    return api.post(`/admin/wasto-achievements/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  }
+
+  async deleteWastoAchievement(id: number) {
+    return api.delete(`/admin/wasto-achievements/${id}`);
+  }
 }
 
 export const adminService = new AdminService(); 

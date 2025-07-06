@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TeamMemberSeeder::class,
             PartnerSeeder::class,
+            WastoAchievementSeeder::class,
         ]);
         
     }

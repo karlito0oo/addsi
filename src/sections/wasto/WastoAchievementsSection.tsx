@@ -1,5 +1,16 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { adminService } from '../../services/admin.service';
+import { STORAGE_URL } from '../../config';
+
+interface Achievement {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  achievement_date: string | null;
+  order: number;
+}
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -113,7 +124,7 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
         <p className="text-gray-600 mb-4">{description}</p>
         {date && (
           <p className="text-sm text-gray-500 italic">
-            {date}
+            {new Date(date).toLocaleDateString()}
           </p>
         )}
       </div>
@@ -123,32 +134,25 @@ const AchievementCard: React.FC<AchievementCardProps> = ({ image, title, descrip
 
 export default function WastoAchievementsSection() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const achievements = [
-    {
-      image: "/images/wasto/achivements1.png",
-      title: "Miss Earth 2022 Beauty Pageant Q&A",
-      description: "The pedestal used during the Q&A (Hashtag Round) of Miss Earth 2022 beauty pageant held at Okada, Manila is made from 33,788 pieces of single-use sachets taken out of the ocean, & the woven basket is made out of water hyacinth. The upcycled products were exclusively designed and made by Ecohome Art.",
-      date: "November 29, 2022"
-    },
-    {
-      image: "/images/wasto/achivements2.png",
-      title: "4th Philippine Environment Summit",
-      description: "The launching of WASTO Waste Solutions products took place at the 4th Philippine Environment Summit on February 21-23 at the Taal Vista Hotel in Tagaytay, Cavite organized by Green Convergence and DENR with the theme: 'Caring for Earth: Scaling up Solutions to the Climate Emergency'.",
-      date: "February 21-23, 2023"
-    },
-    {
-      image: "/images/wasto/achivements3.png",
-      title: "WASTO Waste Solutions Booth",
-      description: "WASTO Waste Solutions booth during the 4th Philippine Environment Summit, showcasing our innovative waste management solutions and sustainable products.",
-    },
-    {
-      image: "/images/wasto/achivements4.png",
-      title: "DENR-EMB Certification",
-      description: "With our recently acquired Certificate of Non-Coverage (CNC) from the DENR-EMB, we affirm that our initiatives have minimal environmental impact and comply with environmental regulations. This certification strengthens our commitment to responsible and sustainable development.",
-      date: "November 9, 2024"
-    }
-  ];
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        const response = await adminService.getWastoAchievements();
+        setAchievements(response.data);
+      } catch (err) {
+        console.error('Error fetching achievements:', err);
+        setError('Failed to load achievements');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAchievements();
+  }, []);
 
   return (
     <motion.section
@@ -156,7 +160,7 @@ export default function WastoAchievementsSection() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50"
+      className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 relative min-h-[400px]"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
@@ -173,20 +177,42 @@ export default function WastoAchievementsSection() {
           </p>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {achievements.map((achievement, index) => (
-            <AchievementCard
-              key={index}
-              {...achievement}
-              onImageClick={() => setSelectedImage({ image: achievement.image, title: achievement.title })}
-            />
-          ))}
-        </motion.div>
+        {loading ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-4">
+              <div className="relative">
+                <div className="w-16 h-16 border-4 border-green-200 rounded-full animate-spin border-t-green-700"></div>
+                <div className="w-16 h-16 border-4 border-transparent rounded-full absolute top-0 animate-ping border-t-green-700 opacity-20"></div>
+              </div>
+              <p className="text-green-700 font-medium animate-pulse">Loading achievements...</p>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="text-center text-red-600 py-8">{error}</div>
+        ) : (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {achievements
+              .sort((a, b) => a.order - b.order)
+              .map((achievement) => (
+                <AchievementCard
+                  key={achievement.id}
+                  image={`${STORAGE_URL}/${achievement.image}`}
+                  title={achievement.title}
+                  description={achievement.description}
+                  date={achievement.achievement_date || undefined}
+                  onImageClick={() => setSelectedImage({
+                    image: `${STORAGE_URL}/${achievement.image}`,
+                    title: achievement.title
+                  })}
+                />
+              ))}
+          </motion.div>
+        )}
       </div>
 
       <ImageModal

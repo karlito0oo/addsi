@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { authService } from './services/auth.service';
 import TeamManagement from './pages/admin/TeamManagement';
 import PartnersManagement from './pages/admin/PartnersManagement';
+import WastoAchievementsManagement from './pages/admin/WastoAchievementsManagement';
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -92,7 +93,7 @@ function App() {
           <Route path="team" element={<TeamManagement />} />
           <Route path="partners" element={<PartnersManagement />} />
           <Route path="services" element={<div>Services Management</div>} />
-          <Route path="wasto-achievements" element={<div>Wasto Achievements Management</div>} />
+          <Route path="wasto-achievements" element={<WastoAchievementsManagement />} />
           <Route path="others" element={<div>Other Settings</div>} />
         </Route>
 
