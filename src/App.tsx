@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import AdminLayout from './components/AdminLayout';
 import { useEffect, useState } from 'react';
 import { authService } from './services/auth.service';
+import TeamManagement from './pages/admin/TeamManagement';
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -64,6 +65,10 @@ function App() {
     </div>
   );
 
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+  };
+
   return (
     <Router>
       <ScrollToTop />
@@ -72,7 +77,7 @@ function App() {
         <Route path="/login" element={
           isAuthenticated ? 
           <Navigate to="/admin" replace /> : 
-          <LoginPage onLoginSuccess={() => setIsAuthenticated(true)} />
+          <LoginPage onLoginSuccess={handleLoginSuccess} />
         } />
         <Route
           path="/admin/*"
@@ -83,7 +88,7 @@ function App() {
           }
         >
           <Route index element={<Navigate to="/admin/team" replace />} />
-          <Route path="team" element={<div>Team Management</div>} />
+          <Route path="team" element={<TeamManagement />} />
           <Route path="partners" element={<div>Partners Management</div>} />
           <Route path="services" element={<div>Services Management</div>} />
           <Route path="wasto-achievements" element={<div>Wasto Achievements Management</div>} />

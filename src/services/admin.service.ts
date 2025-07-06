@@ -1,4 +1,4 @@
-import { apiService } from './api';
+import { api } from './api';
 
 interface AdminResponse {
   message: string;
@@ -6,24 +6,28 @@ interface AdminResponse {
 }
 
 class AdminService {
-  async getTeamData(): Promise<AdminResponse> {
-    return await apiService.get<AdminResponse>('/admin/team');
+  async getTeamMembers() {
+    return api.get('/team-members');
   }
 
-  async getPartnersData(): Promise<AdminResponse> {
-    return await apiService.get<AdminResponse>('/admin/partners');
+  async createTeamMember(data: FormData) {
+    return api.post('/team-members', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   }
 
-  async getServicesData(): Promise<AdminResponse> {
-    return await apiService.get<AdminResponse>('/admin/services');
+  async updateTeamMember(id: number, data: FormData) {
+    return api.post(`/team-members/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   }
 
-  async getWastoAchievements(): Promise<AdminResponse> {
-    return await apiService.get<AdminResponse>('/admin/wasto-achievements');
-  }
-
-  async getOthersData(): Promise<AdminResponse> {
-    return await apiService.get<AdminResponse>('/admin/others');
+  async deleteTeamMember(id: number) {
+    return api.delete(`/team-members/${id}`);
   }
 }
 

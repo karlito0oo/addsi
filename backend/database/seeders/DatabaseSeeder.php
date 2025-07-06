@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => Hash::make('password123'), // you can change the password here
         ]);
+
+        $this->call([
+            TeamMemberSeeder::class,
+        ]);
         
     }
 }
