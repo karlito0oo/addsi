@@ -7,6 +7,7 @@ use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\WastoAchievementController;
 use App\Http\Controllers\WastoProductController;
+use App\Http\Controllers\SettingController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -14,6 +15,7 @@ Route::get('/team-members', [TeamMemberController::class, 'index']);
 Route::get('/partners', [PartnerController::class, 'index']);
 Route::get('/wasto-achievements', [WastoAchievementController::class, 'index']);
 Route::get('/wasto-products', [WastoProductController::class, 'index']);
+Route::get('/settings', [SettingController::class, 'index']);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -39,4 +41,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin/wasto-products/{product}', [WastoProductController::class, 'update']);
     Route::delete('/admin/wasto-products/{product}', [WastoProductController::class, 'destroy']);
 
+    // Settings Management
+    Route::post('/admin/settings/{setting}', [SettingController::class, 'update']);
 }); 

@@ -109,6 +109,20 @@ class AdminService {
   async deleteWastoProduct(id: number) {
     return api.delete(`/admin/wasto-products/${id}`);
   }
+
+  // Settings
+  async getSettings(group?: string) {
+    const params = group ? { group } : {};
+    return api.get('/settings', { params });
+  }
+
+  async updateSetting(id: number, data: FormData) {
+    return api.post(`/admin/settings/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+  }
 }
 
 export const adminService = new AdminService(); 

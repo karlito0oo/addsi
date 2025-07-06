@@ -56,13 +56,13 @@ export default function PartnersAffiliationsSection() {
   return (
     <section
       className="w-full relative py-12 px-2 sm:px-0"
-      style={{
-        backgroundImage: 'url(/background1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
     >
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10"
+        style={{
+          backgroundImage: 'url(/images/background1.jpg)',
+        }}
+      />
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

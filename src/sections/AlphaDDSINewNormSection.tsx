@@ -17,7 +17,7 @@ export default function AlphaDDSINewNormSection() {
           viewport={{ once: true }}
           className="relative rounded-lg overflow-hidden shadow-lg"
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/background1.jpg)' }} />
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/background1.jpg)' }} />
           <div className="relative bg-white/80 backdrop-blur p-8 h-full flex flex-col justify-between">
             <h2 className="text-4xl font-serif font-bold mb-4 italic">ALPHA DDSI in the New Norm</h2>
             <div className="text-gray-800 mb-4">
@@ -35,7 +35,7 @@ export default function AlphaDDSINewNormSection() {
           viewport={{ once: true }}
           className="relative rounded-lg overflow-hidden shadow-lg"
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/background1.jpg)' }} />
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/background1.jpg)' }} />
           <div className="relative bg-white/80 backdrop-blur p-8 h-full flex flex-col justify-between">
             <h2 className="text-4xl font-serif font-bold mb-4 italic">Facing the Challenge</h2>
             <div className="flex flex-col items-center mb-4">
@@ -56,7 +56,7 @@ export default function AlphaDDSINewNormSection() {
           viewport={{ once: true }}
           className="relative rounded-lg overflow-hidden shadow-lg"
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/background1.jpg)' }} />
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/background1.jpg)' }} />
           <div className="relative bg-white/80 backdrop-blur p-8 h-full flex flex-col justify-between">
             <h2 className="text-4xl font-serif font-bold mb-4 italic">Compliance to EPR Law</h2>
             <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -91,7 +91,7 @@ export default function AlphaDDSINewNormSection() {
           viewport={{ once: true }}
           className="relative rounded-lg overflow-hidden shadow-lg"
         >
-          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/background1.jpg)' }} />
+          <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/background1.jpg)' }} />
           <div className="relative bg-white/80 backdrop-blur p-8 h-full flex flex-col">
             <h2 className="text-4xl font-serif font-bold mb-4 italic">THE TIME TO ACT IS NOW</h2>
             <div className="text-gray-800 mb-4">

@@ -28,9 +28,9 @@ const AdminLayout: React.FC = () => {
     { label: 'Our Team', path: '/admin/team', icon: '👥' },
     { label: 'Partners and Affiliations', path: '/admin/partners', icon: '🤝' },
     { label: 'Our Services', path: '/admin/services', icon: '⚡' },
-    { label: 'Wasto Achievements', path: '/admin/wasto-achievements', icon: '��' },
+    { label: 'Wasto Achievements', path: '/admin/wasto-achievements', icon: '🏆' },
     { label: 'Wasto Products', path: '/admin/wasto-products', icon: '🛍️' },
-    { label: 'Others', path: '/admin/others', icon: '⚙️' },
+    { label: 'Settings', path: '/admin/settings', icon: '⚙️' },
   ];
 
   return (

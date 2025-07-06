@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Setting extends Model
+{
+    protected $fillable = [
+        'key',
+        'value',
+        'type',
+        'group',
+        'label'
+    ];
+
+    protected $casts = [
+        'type' => 'string',
+        'group' => 'string'
+    ];
+} 

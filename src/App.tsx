@@ -13,6 +13,7 @@ import TeamManagement from './pages/admin/TeamManagement';
 import PartnersManagement from './pages/admin/PartnersManagement';
 import WastoAchievementsManagement from './pages/admin/WastoAchievementsManagement';
 import WastoProductsManagement from './pages/admin/WastoProductsManagement';
+import SettingsManagement from './pages/admin/SettingsManagement';
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -96,6 +97,7 @@ function App() {
           <Route path="services" element={<div>Services Management</div>} />
           <Route path="wasto-achievements" element={<WastoAchievementsManagement />} />
           <Route path="wasto-products" element={<WastoProductsManagement />} />
+          <Route path="settings" element={<SettingsManagement />} />
           <Route path="others" element={<div>Other Settings</div>} />
         </Route>
 

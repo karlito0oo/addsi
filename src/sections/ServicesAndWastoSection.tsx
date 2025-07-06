@@ -16,13 +16,13 @@ export default function ServicesAndWastoSection() {
   return (
     <section
       className="w-full py-12 px-2 sm:px-0 relative"
-      style={{
-        backgroundImage: 'url(/background1.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
     >
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10"
+        style={{
+          backgroundImage: `url(/images/background1.jpg)`,
+        }}
+      />
       <div className="w-[90%] max-w-7xl mx-auto bg-white/80 rounded-lg shadow p-4 sm:p-10 relative overflow-hidden flex flex-col gap-12">
         {/* Our Services */}
         <motion.div

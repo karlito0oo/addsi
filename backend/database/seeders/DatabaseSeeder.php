@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PartnerSeeder::class,
             WastoAchievementSeeder::class,
             WastoProductSeeder::class,
+            SettingSeeder::class,
         ]);
         
     }
