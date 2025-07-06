@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import PrivacyModal from './PrivacyModal';
 
 const navigation = {
   main: [
@@ -37,6 +39,8 @@ const navigation = {
 };
 
 export default function Footer() {
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+
   return (
     <footer className="bg-white border-t w-full">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -57,10 +61,23 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; {new Date().getFullYear()} Alpha Distinct Development Solutions Inc. All rights reserved.
-        </p>
+        <div className="mt-10 text-center">
+          <p className="text-xs leading-5 text-gray-500">
+            &copy; {new Date().getFullYear()} Alpha Distinct Development Solutions Inc. All rights reserved.
+          </p>
+          <p
+            onClick={() => setIsPrivacyModalOpen(true)}
+            className="text-xs leading-5 text-gray-500 hover:text-gray-900 mt-2 underline"
+          >
+            Privacy Policy
+          </p>
+        </div>
       </div>
+
+      <PrivacyModal
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
     </footer>
   );
 } 

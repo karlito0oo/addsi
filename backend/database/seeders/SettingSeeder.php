@@ -11,6 +11,54 @@ class SettingSeeder extends Seeder
     {
         $settings = [
             [
+                'key' => 'privacy_policy',
+                'value' => '<h2>Privacy Policy</h2>
+<p>At Alpha Distinct Development Solutions Inc. (ADDSI), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data.</p>
+
+<h3>Information We Collect</h3>
+<p>We collect information that you voluntarily provide to us when you:</p>
+<ul>
+    <li>Contact us through our website</li>
+    <li>Sign up for our newsletter</li>
+    <li>Participate in our programs</li>
+    <li>Apply for employment</li>
+</ul>
+
+<h3>How We Use Your Information</h3>
+<p>We use the collected information to:</p>
+<ul>
+    <li>Respond to your inquiries</li>
+    <li>Process your applications</li>
+    <li>Send you updates about our programs</li>
+    <li>Improve our services</li>
+</ul>
+
+<h3>Data Protection</h3>
+<p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+<h3>Your Rights</h3>
+<p>You have the right to:</p>
+<ul>
+    <li>Access your personal information</li>
+    <li>Request corrections to your data</li>
+    <li>Withdraw your consent</li>
+    <li>Request data deletion</li>
+</ul>
+
+<h3>Contact Us</h3>
+<p>If you have questions about this Privacy Policy, please contact us at privacy@addsi.ph</p>',
+                'type' => 'textarea',
+                'group' => 'footer',
+                'label' => 'Privacy Policy'
+            ],
+            [
+                'key' => 'hero_tagline',
+                'value' => 'Your Regenerative Sustainability Partner',
+                'type' => 'text',
+                'group' => 'hero',
+                'label' => 'Alpha Hero Section Tagline'
+            ],
+            [
                 'key' => 'wasto_achievements_description',
                 'value' => 'Discover our milestones in sustainable waste management and environmental conservation',
                 'type' => 'textarea',

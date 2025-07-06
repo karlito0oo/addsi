@@ -18,30 +18,23 @@ class SettingController extends Controller
 
     public function getPublicSettings()
     {
-        $cacheKey = 'public_settings';
-        $cacheDuration = 60 * 24; // 24 hours
+        $settings = Setting::whereIn('group', [
+            'who_we_are',
+            'mission_vision',
+            'wasto_achievements',
+            'basic_essentials',
+            'flute_sheet'
+        ])->get();
 
-        return response()->json(
-            cache()->remember($cacheKey, $cacheDuration, function () {
-                $settings = Setting::whereIn('group', [
-                    'who_we_are',
-                    'mission_vision',
-                    'wasto_achievements',
-                    'basic_essentials',
-                    'flute_sheet'
-                ])->get();
+        // Group settings by their group
+        $groupedSettings = $settings->groupBy('group')->map(function ($groupSettings) {
+            return $groupSettings->reduce(function ($acc, $setting) {
+                $acc[$setting->key] = $setting->value;
+                return $acc;
+            }, []);
+        });
 
-                // Group settings by their group
-                $groupedSettings = $settings->groupBy('group')->map(function ($groupSettings) {
-                    return $groupSettings->reduce(function ($acc, $setting) {
-                        $acc[$setting->key] = $setting->value;
-                        return $acc;
-                    }, []);
-                });
-
-                return $groupedSettings;
-            })
-        );
+        return response()->json($groupedSettings);
     }
 
     public function update(Request $request, Setting $setting)
@@ -73,9 +66,6 @@ class SettingController extends Controller
         }
         
         $setting->update($data);
-
-        // Clear the settings cache
-        cache()->forget('public_settings');
 
         return response()->json($setting);
     }

@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
+import { usePublicData } from '../contexts/PublicDataContext';
 
 export default function HeroSection() {
+  const { data } = usePublicData();
+  const heroSettings = data.settings.hero || {};
+
   return (
     <section className="w-full pt-20">
       
@@ -36,7 +40,7 @@ export default function HeroSection() {
         >
           <div className="border-t border-green-800 w-40 mb-4" />
           <div className="text-center text-black font-bold text-base leading-tight">
-          Your Regenerative Sustainability Partner
+            {heroSettings.hero_tagline || 'Your Regenerative Sustainability Partner'}
           </div>
         </motion.div>
       </div>

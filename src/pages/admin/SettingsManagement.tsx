@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { adminService } from '../../services/admin.service';
 import { motion } from 'framer-motion';
 import { STORAGE_URL } from '../../config';
+import { Editor } from '@tinymce/tinymce-react';
 
 interface Setting {
   id: number;
@@ -123,7 +124,7 @@ const SettingsManagement = () => {
         {/* Modal */}
         {isModalOpen && editingSetting && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-lg p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
               <h2 className="text-2xl font-bold mb-6">
                 Edit {editingSetting.label}
               </h2>
@@ -140,12 +141,24 @@ const SettingsManagement = () => {
                 )}
 
                 {editingSetting.type === 'textarea' && (
-                  <textarea
+                  <Editor
+                    apiKey="64rh1j62dcc88bffgbbmcw34ick3av3ikgv56fpll6jovyyj"
                     value={formValue}
-                    onChange={(e) => setFormValue(e.target.value)}
-                    className="bg-white w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    rows={5}
-                    required
+                    onEditorChange={(content) => setFormValue(content)}
+                    init={{
+                      height: 400,
+                      menubar: true,
+                      plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                      ],
+                      toolbar: 'undo redo | blocks | ' +
+                        'bold italic forecolor | alignleft aligncenter ' +
+                        'alignright alignjustify | bullist numlist outdent indent | ' +
+                        'removeformat | help',
+                      content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; }'
+                    }}
                   />
                 )}
 
@@ -212,9 +225,10 @@ const SettingsManagement = () => {
                           className="mt-2 max-w-xs h-auto rounded"
                         />
                       ) : (
-                        <p className="mt-1 text-gray-600 whitespace-pre-wrap">
-                          {setting.value}
-                        </p>
+                        <div 
+                          className="mt-1 text-gray-600 prose max-w-none"
+                          dangerouslySetInnerHTML={{ __html: setting.value }}
+                        />
                       )}
                     </div>
                     <button
