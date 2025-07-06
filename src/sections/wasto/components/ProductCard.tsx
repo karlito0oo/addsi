@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { STORAGE_URL } from '../../../config';
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -36,7 +37,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }
               </svg>
             </button>
             <img
-              src={image}
+                src={`${STORAGE_URL}/${image}`}
               alt={title}
               className="w-full h-auto rounded-lg shadow-2xl"
             />
@@ -76,7 +77,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ image, title, description }) 
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
-            src={image}
+            src={`${STORAGE_URL}/${image}`}
             alt={title}
             className="w-full h-full object-cover"
           />

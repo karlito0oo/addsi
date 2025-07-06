@@ -76,12 +76,38 @@ class AdminService {
     return api.post(`/admin/wasto-achievements/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
-      },
+      }
     });
   }
 
   async deleteWastoAchievement(id: number) {
     return api.delete(`/admin/wasto-achievements/${id}`);
+  }
+
+  // Wasto Products
+  async getWastoProducts(type?: string) {
+    const params = type ? { type } : {};
+    return api.get('/wasto-products', { params });
+  }
+
+  async createWastoProduct(formData: FormData) {
+    return api.post('/admin/wasto-products', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+  }
+
+  async updateWastoProduct(id: number, data: FormData) {
+    return api.post(`/admin/wasto-products/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+  }
+
+  async deleteWastoProduct(id: number) {
+    return api.delete(`/admin/wasto-products/${id}`);
   }
 }
 

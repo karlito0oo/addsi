@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             TeamMemberSeeder::class,
             PartnerSeeder::class,
             WastoAchievementSeeder::class,
+            WastoProductSeeder::class,
         ]);
         
     }

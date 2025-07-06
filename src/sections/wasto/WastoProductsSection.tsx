@@ -1,50 +1,53 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProductCard from './components/ProductCard';
+import { adminService } from '../../services/admin.service';
+
+interface WastoProduct {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  type: string;
+  order: number;
+}
 
 const WastoProductsSection = () => {
-  
-    const products = [
-        {
-          category: "Typhoon Disaster Response",
-          image: "/images/wasto/p1.png",
-          description: ""
-        },
-        {
-          category: "Eco-Coolers",
-          image: "/images/wasto/p2.png",
-          description: ""
-        },
-        {
-          category: "Drop Box",
-          image: "/images/wasto/p3.png",
-          description: ""
-        },
-        {
-          category: "Salvabida",
-          image: "/images/wasto/p4.png",
-          description: ""
-        },
-        {
-          category: "Street Furniture",
-          image: "/images/wasto/p5.png",
-          description: ""
-        },
-        {
-          category: "Signage",
-          image: "/images/wasto/p6.png",
-          description: ""
-        },
-        {
-          category: "Chairs and Table",
-          image: "/images/wasto/p7.png",
-          description: ""
-        },
-        {
-          category: "Trash Bins",
-          image: "/images/wasto/p8.png",
-          description: ""
-        }
-      ];
+  const [products, setProducts] = useState<WastoProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await adminService.getWastoProducts('product');
+        setProducts(response.data);
+      } catch (err) {
+        setError('Failed to load products');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <motion.div 
@@ -72,10 +75,10 @@ const WastoProductsSection = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {products.map((product, index) => (
+          {products.map((product) => (
             <ProductCard
-              key={index}
-              image={product.image}
+              key={product.id}
+              image={`${product.image}`}
               title={product.category}
               description={product.description}
             />

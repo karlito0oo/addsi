@@ -1,34 +1,53 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProductCard from './components/ProductCard';
+import { adminService } from '../../services/admin.service';
+
+interface WastoProduct {
+  id: number;
+  category: string;
+  description: string;
+  image: string;
+  type: string;
+  order: number;
+}
 
 const BasicEssentialsSection = () => {
-  const products = [
-    {
-      category: "Crates",
-      image: "/images/wasto/es1.png",
-      description: "Sustainable cooling solutions for everyday use"
-    },
-    {
-      category: "Chairs",
-      image: "/images/wasto/es2.png",
-      description: "Convenient storage solutions"
-    },
-    {
-      category: "Bench & Tables",
-      image: "/images/wasto/es3.png",
-      description: "Durable outdoor furniture solutions"
-    },
-    {
-      category: "Tumblers",
-      image: "/images/wasto/es4.png",
-      description: "Clear and sustainable signage options"
-    },
-    {
-      category: "Tote Boxes",
-      image: "/images/wasto/es5.png",
-      description: "Comfortable and eco-friendly furniture"
-    }
-  ];
+  const [products, setProducts] = useState<WastoProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await adminService.getWastoProducts('essential');
+        setProducts(response.data);
+      } catch (err) {
+        setError('Failed to load products');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="py-16 bg-white">
@@ -51,10 +70,10 @@ const BasicEssentialsSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <ProductCard
-              key={index}
-              image={product.image}
+              key={product.id}
+              image={`${product.image}`}
               title={product.category}
               description={product.description}
             />
