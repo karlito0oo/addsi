@@ -3,19 +3,22 @@ import { API_URL } from '../config/index';
 
 export const api = axios.create({
   baseURL: `${API_URL}/api`,
-  headers: {
-    'Content-Type': 'application/json',
-  },
   withCredentials: true,
 });
 
-// Add request interceptor to include the token
+// Add request interceptor to include the token and handle FormData
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // Don't set Content-Type for FormData, let the browser set it with the boundary
+    if (!(config.data instanceof FormData)) {
+      config.headers['Content-Type'] = 'application/json';
+    }
+
     return config;
   },
   (error) => {

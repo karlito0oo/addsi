@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { usePublicData } from '../contexts/PublicDataContext';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -15,6 +16,9 @@ interface ContactFormData {
 }
 
 export default function ContactPage() {
+  const { data, loading, error } = usePublicData();
+  const companyDetails = data.settings.company_details || {};
+
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
@@ -65,6 +69,22 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-24 flex justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen pt-24 flex justify-center items-center">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,8 +123,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900">Email</p>
-                  <a href="mailto:support@alphadssi.com" className="text-base text-gray-600 hover:text-green-600 transition-colors">
-                    info@alphadssi.com
+                  <a href={`mailto:${companyDetails.company_email}`} className="text-base text-gray-600 hover:text-green-600 transition-colors">
+                    {companyDetails.company_email}
                   </a>
                 </div>
               </motion.div>
@@ -118,14 +138,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900">Phone</p>
-                  <div className="space-y-1">
-                    <a href="tel:+6328876728" className="block text-base text-gray-600 hover:text-green-600 transition-colors">
-                      +63 2 8876 7285
-                    </a>
-                    <a href="tel:+639953243922" className="block text-base text-gray-600 hover:text-green-600 transition-colors">
-                      +63 995 324 3922
-                    </a>
-                  </div>
+                  <a href={`tel:${companyDetails.company_phone}`} className="text-base text-gray-600 hover:text-green-600 transition-colors">
+                    {companyDetails.company_phone}
+                  </a>
                 </div>
               </motion.div>
 
@@ -138,10 +153,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-900">Address</p>
-                  <p className="text-base text-gray-600">
-                    17 Valencia St., Susana Heights Subd.,<br />
-                    Tunasan Muntinlupa City,<br />
-                    Philippines 1774
+                  <p className="text-base text-gray-600 whitespace-pre-wrap">
+                    {companyDetails.company_address}
                   </p>
                 </div>
               </motion.div>
@@ -149,16 +162,7 @@ export default function ContactPage() {
 
             {/* Map */}
             <div className="mt-8 rounded-xl overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3864.063683985343!2d121.04974277580661!3d14.38000568533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d0a7c1b5c483%3A0x8b4eb761b120d0d1!2sSusana%20Heights%20Subdivision!5e0!3m2!1sen!2sph!4v1709697436841!5m2!1sen!2sph"
-                width="100%"
-                height="300"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Office Location"
-              />
+              <div dangerouslySetInnerHTML={{ __html: companyDetails.google_maps_iframe }} />
             </div>
           </motion.div>
 
@@ -250,24 +254,16 @@ export default function ContactPage() {
                 </motion.button>
               </div>
 
-              {/* Status Messages */}
               {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-green-600 text-center"
-                >
+                <div className="bg-green-50 text-green-800 rounded-md p-4">
                   Message sent successfully!
-                </motion.div>
+                </div>
               )}
+
               {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-600 text-center"
-                >
-                  {errorMessage || 'Failed to send message. Please try again.'}
-                </motion.div>
+                <div className="bg-red-50 text-red-800 rounded-md p-4">
+                  {errorMessage}
+                </div>
               )}
             </form>
           </motion.div>

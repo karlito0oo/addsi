@@ -77,35 +77,35 @@ function App() {
   return (
     <Router>
       <PublicDataProvider>
-        <ScrollToTop />
-        <Routes>
-          {/* Admin routes */}
-          <Route path="/login" element={
-            isAuthenticated ? 
-            <Navigate to="/admin" replace /> : 
-            <LoginPage onLoginSuccess={handleLoginSuccess} />
-          } />
-          <Route
-            path="/admin/*"
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Navigate to="/admin/team" replace />} />
-            <Route path="team" element={<TeamManagement />} />
+      <ScrollToTop />
+      <Routes>
+        {/* Admin routes */}
+        <Route path="/login" element={
+          isAuthenticated ? 
+          <Navigate to="/admin" replace /> : 
+          <LoginPage onLoginSuccess={handleLoginSuccess} />
+        } />
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Navigate to="/admin/team" replace />} />
+          <Route path="team" element={<TeamManagement />} />
             <Route path="partners" element={<PartnersManagement />} />
-            <Route path="services" element={<div>Services Management</div>} />
+          <Route path="services" element={<div>Services Management</div>} />
             <Route path="wasto-achievements" element={<WastoAchievementsManagement />} />
             <Route path="wasto-products" element={<WastoProductsManagement />} />
             <Route path="settings" element={<SettingsManagement />} />
-            <Route path="others" element={<div>Other Settings</div>} />
-          </Route>
+          <Route path="others" element={<div>Other Settings</div>} />
+        </Route>
 
-          {/* Public routes */}
-          <Route path="/*" element={<PublicLayout />} />
-        </Routes>
+        {/* Public routes */}
+        <Route path="/*" element={<PublicLayout />} />
+      </Routes>
       </PublicDataProvider>
     </Router>
   );

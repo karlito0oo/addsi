@@ -135,6 +135,12 @@ class AdminService {
   }
 
   async updateSetting(id: number, data: FormData) {
+    console.log('Updating setting with ID:', id);
+    console.log('FormData contents:');
+    for (const pair of data.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
     return api.post(`/admin/settings/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',

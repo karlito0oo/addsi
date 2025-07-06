@@ -51,9 +51,12 @@ const SettingsManagement = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    console.log('Selected file:', file);
     if (file) {
       setImageFile(file);
       setPreviewImage(URL.createObjectURL(file));
+      console.log('Image file set:', file);
+      console.log('Preview URL created');
     }
   };
 
@@ -64,19 +67,38 @@ const SettingsManagement = () => {
     try {
       const form = new FormData();
       
-      if (editingSetting.type === 'image' && imageFile) {
-        form.append('value', imageFile);
+      console.log('Editing setting:', editingSetting);
+      console.log('Image file:', imageFile);
+      console.log('Form value:', formValue);
+
+      if (editingSetting.type === 'image') {
+        if (imageFile) {
+          console.log('Appending image file to form:', imageFile);
+          form.append('value', imageFile);
+        } else if (formValue) {
+          console.log('Appending existing value to form:', formValue);
+          form.append('value', formValue);
+        }
       } else {
         form.append('value', formValue);
       }
 
-      await adminService.updateSetting(editingSetting.id, form);
-      fetchSettings();
+      // Log form data contents
+      console.log('Form data entries:');
+      for (const pair of form.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+
+      const response = await adminService.updateSetting(editingSetting.id, form);
+      console.log('Update response:', response);
+      
+      await fetchSettings();
       setIsModalOpen(false);
       resetForm();
     } catch (err: any) {
+      console.error('Full error object:', err);
+      console.error('Error response:', err.response);
       setError(err.response?.data?.message || 'An error occurred');
-      console.error(err);
     }
   };
 
@@ -169,6 +191,7 @@ const SettingsManagement = () => {
                       onChange={handleImageChange}
                       className="w-full"
                       accept="image/*"
+                      name="value"
                     />
                     {previewImage && (
                       <img

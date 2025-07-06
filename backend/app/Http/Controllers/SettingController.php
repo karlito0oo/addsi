@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
@@ -55,18 +56,42 @@ class SettingController extends Controller
         }
 
         $validated = $request->validate($validationRules);
-
         $data = $request->all();
-        
-        if ($request->hasFile('value')) {
-            $file = $request->file('value');
-            $filename = 'settings/' . $file->getClientOriginalName();
-            $file->storeAs('public', $filename);
-            $data['value'] = $filename;
-        }
-        
-        $setting->update($data);
 
-        return response()->json($setting);
+        try {
+            if ($setting->type === 'image' && $request->hasFile('value')) {
+                // Delete old image if it exists
+                if ($setting->value) {
+                    Storage::disk('public')->delete($setting->value);
+                }
+
+                $file = $request->file('value');
+                
+                // Create settings directory if it doesn't exist
+                Storage::disk('public')->makeDirectory('settings');
+                
+                // Generate unique filename
+                $extension = $file->getClientOriginalExtension();
+                $filename = 'settings/' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) 
+                    . '_' . Str::random(10) . '.' . $extension;
+
+                // Store the file
+                $path = $file->storeAs('', $filename, 'public');
+                Log::info('File stored at path: ' . $path);
+                
+                if (!$path) {
+                    throw new \Exception('Failed to store file');
+                }
+                
+                $data['value'] = $filename;
+            }
+
+            $setting->update($data);
+            return response()->json($setting);
+            
+        } catch (\Exception $e) {
+            Log::error('Error updating setting: ' . $e->getMessage());
+            return response()->json(['message' => 'Failed to update setting: ' . $e->getMessage()], 500);
+        }
     }
 } 

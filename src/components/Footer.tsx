@@ -1,6 +1,15 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import PrivacyModal from './PrivacyModal';
+import { usePublicData } from '../contexts/PublicDataContext';
+
+type SocialPlatform = 'Facebook' | 'Instagram' | 'LinkedIn';
+
+interface SocialIcon {
+  name: SocialPlatform;
+  icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
+}
 
 const navigation = {
   main: [
@@ -10,8 +19,7 @@ const navigation = {
   ],
   social: [
     {
-      name: 'Facebook',
-      href: '#',
+      name: 'Facebook' as const,
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -23,8 +31,7 @@ const navigation = {
       ),
     },
     {
-      name: 'Instagram',
-      href: '#',
+      name: 'Instagram' as const,
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -35,11 +42,31 @@ const navigation = {
         </svg>
       ),
     },
-  ],
+    {
+      name: 'LinkedIn' as const,
+      icon: (props: React.SVGProps<SVGSVGElement>) => (
+        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+          <path
+            fillRule="evenodd"
+            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+            clipRule="evenodd"
+          />
+        </svg>
+      ),
+    },
+  ] as SocialIcon[],
 };
 
 export default function Footer() {
+  const { data } = usePublicData();
+  const socialMedia = data.settings.social_media || {};
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
+
+  const socialLinks: Record<SocialPlatform, string | undefined> = {
+    Facebook: socialMedia.facebook_url,
+    Instagram: socialMedia.instagram_url,
+    LinkedIn: socialMedia.linkedin_url,
+  };
 
   return (
     <footer className="bg-white border-t w-full">
@@ -54,12 +81,21 @@ export default function Footer() {
           ))}
         </nav>
         <div className="mt-10 flex justify-center space-x-10">
-          {navigation.social.map((item) => (
-            <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
-              <span className="sr-only">{item.name}</span>
-              <item.icon className="h-6 w-6" aria-hidden="true" />
-            </a>
-          ))}
+          {navigation.social.map((item) => {
+            const link = socialLinks[item.name];
+            return link ? (
+              <a
+                key={item.name}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-500"
+              >
+                <span className="sr-only">{item.name}</span>
+                <item.icon className="h-6 w-6" aria-hidden="true" />
+              </a>
+            ) : null;
+          })}
         </div>
         <div className="mt-10 text-center">
           <p className="text-xs leading-5 text-gray-500">
@@ -67,7 +103,7 @@ export default function Footer() {
           </p>
           <p
             onClick={() => setIsPrivacyModalOpen(true)}
-            className="text-xs leading-5 text-gray-500 hover:text-gray-900 mt-2 underline"
+            className="text-xs leading-5 text-gray-500 hover:text-gray-900 mt-2 underline cursor-pointer"
           >
             Privacy Policy
           </p>
