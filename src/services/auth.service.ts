@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { API_URL } from '../config';
 
-const API_URL = 'http://localhost:8000/api';
 
 // Configure axios defaults
 axios.defaults.withCredentials = true;
@@ -11,7 +11,7 @@ const authStateChanged = new Event('storage');
 export const authService = {
     async login(credentials: { email: string; password: string }) {
         try {
-            const response = await axios.post(`${API_URL}/login`, credentials, {
+            const response = await axios.post(`${API_URL}/api/login`, credentials, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
@@ -37,7 +37,7 @@ export const authService = {
         try {
             const token = this.getToken();
             if (token) {
-                await axios.post(`${API_URL}/logout`, {}, {
+                await axios.post(`${API_URL}/api/logout`, {}, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',

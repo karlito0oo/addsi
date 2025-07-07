@@ -52,7 +52,7 @@ class TeamMemberSeeder extends Seeder
             'name' => 'MARISSA A. PAGLICAWAN, PH.D.',
             'position' => 'Science and Technology',
             'bio' => '',
-            'image' => 'team-members/default.jpg',
+            'image' => '',
             'category' => 'support',
             'order' => 1,
         ]);
@@ -61,7 +61,7 @@ class TeamMemberSeeder extends Seeder
             'name' => 'ENCARNACION N. RARALIO, PH.D., UAP, ENP',
             'position' => 'Environment and Architecture',
             'bio' => '',
-            'image' => 'team-members/default.jpg',
+            'image' => '',
             'category' => 'support',
             'order' => 2,
         ]);
@@ -70,7 +70,7 @@ class TeamMemberSeeder extends Seeder
             'name' => 'MARICHELLE ANN F. CARREON MM, HD, PHD, PD-SML',
             'position' => 'Livelihood Training',
             'bio' => '',
-            'image' => 'team-members/default.jpg',
+            'image' => '',
             'category' => 'support',
             'order' => 3,
         ]);
