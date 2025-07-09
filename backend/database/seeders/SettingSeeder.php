@@ -10,47 +10,7 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            [
-                'key' => 'privacy_policy',
-                'value' => '<h2>Privacy Policy</h2>
-<p>At Alpha Distinct Development Solutions Inc. (ADDSI), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data.</p>
-
-<h3>Information We Collect</h3>
-<p>We collect information that you voluntarily provide to us when you:</p>
-<ul>
-    <li>Contact us through our website</li>
-    <li>Sign up for our newsletter</li>
-    <li>Participate in our programs</li>
-    <li>Apply for employment</li>
-</ul>
-
-<h3>How We Use Your Information</h3>
-<p>We use the collected information to:</p>
-<ul>
-    <li>Respond to your inquiries</li>
-    <li>Process your applications</li>
-    <li>Send you updates about our programs</li>
-    <li>Improve our services</li>
-</ul>
-
-<h3>Data Protection</h3>
-<p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
-
-<h3>Your Rights</h3>
-<p>You have the right to:</p>
-<ul>
-    <li>Access your personal information</li>
-    <li>Request corrections to your data</li>
-    <li>Withdraw your consent</li>
-    <li>Request data deletion</li>
-</ul>
-
-<h3>Contact Us</h3>
-<p>If you have questions about this Privacy Policy, please contact us at privacy@addsi.ph</p>',
-                'type' => 'textarea',
-                'group' => 'footer',
-                'label' => 'Privacy Policy'
-            ],
+            
             [
                 'key' => 'hero_tagline',
                 'value' => 'Your Regenerative Sustainability Partner',
@@ -202,6 +162,86 @@ Philippines 1774',
                 'type' => 'text',
                 'group' => 'social_media',
                 'label' => 'LinkedIn URL'
+            ],
+            [
+                'key' => 'inquiry_email_subject',
+                'value' => 'Thank you for contacting ADDSI',
+                'type' => 'text',
+                'group' => 'inquiry_email',
+                'label' => 'Inquiry Email Subject'
+            ],
+            [
+                'key' => 'inquiry_email_header',
+                'value' => 'Thank You for Contacting Us',
+                'type' => 'text',
+                'group' => 'inquiry_email',
+                'label' => 'Inquiry Email Header'
+            ],
+            [
+                'key' => 'inquiry_email_body',
+                'value' => "Thank you for reaching out to us. We have received your inquiry regarding \"[subject]\".
+
+This email confirms that we have received your message and our team will review it promptly. We strive to respond to all inquiries within 24-48 business hours.
+
+If you need to add any additional information to your inquiry, please feel free to contact us through our official support channels.",
+                'type' => 'textarea',
+                'group' => 'inquiry_email',
+                'label' => 'Inquiry Email Body Template'
+            ],
+            [
+                'key' => 'inquiry_email_signature',
+                'value' => 'Best regards,<br>The ADDSI Team',
+                'type' => 'text',
+                'group' => 'inquiry_email',
+                'label' => 'Inquiry Email Signature'
+            ],
+            [
+                'key' => 'inquiry_email_footer',
+                'value' => 'This is an automated message. Please do not reply to this email.',
+                'type' => 'text',
+                'group' => 'inquiry_email',
+                'label' => 'Inquiry Email Footer'
+            ],
+            [
+                'key' => 'privacy_policy',
+                'value' => '<h2>Privacy Policy</h2>
+<p>At Alpha Distinct Development Solutions Inc. (ADDSI), we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data.</p>
+
+<h3>Information We Collect</h3>
+<p>We collect information that you voluntarily provide to us when you:</p>
+<ul>
+    <li>Contact us through our website</li>
+    <li>Sign up for our newsletter</li>
+    <li>Participate in our programs</li>
+    <li>Apply for employment</li>
+</ul>
+
+<h3>How We Use Your Information</h3>
+<p>We use the collected information to:</p>
+<ul>
+    <li>Respond to your inquiries</li>
+    <li>Process your applications</li>
+    <li>Send you updates about our programs</li>
+    <li>Improve our services</li>
+</ul>
+
+<h3>Data Protection</h3>
+<p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+<h3>Your Rights</h3>
+<p>You have the right to:</p>
+<ul>
+    <li>Access your personal information</li>
+    <li>Request corrections to your data</li>
+    <li>Withdraw your consent</li>
+    <li>Request data deletion</li>
+</ul>
+
+<h3>Contact Us</h3>
+<p>If you have questions about this Privacy Policy, please contact us at privacy@addsi.ph</p>',
+                'type' => 'textarea',
+                'group' => 'footer',
+                'label' => 'Privacy Policy'
             ],
         ];
 
