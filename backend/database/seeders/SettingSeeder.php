@@ -10,7 +10,13 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            
+            [
+                'key' => 'hero_image',
+                'value' => 'settings/hero-section-image.webp',
+                'type' => 'image',
+                'group' => 'hero',
+                'label' => 'Hero Section Image'
+            ],
             [
                 'key' => 'hero_tagline',
                 'value' => 'Your Regenerative Sustainability Partner',
@@ -121,16 +127,14 @@ ADDSI strive to make a lasting and positive impact on the lives of our people, f
             ],
             [
                 'key' => 'company_phone',
-                'value' => '+65 1234 5678, +63 995 324 3922',
+                'value' => '(02) 8876 7285, +63 995 324 3922',
                 'type' => 'text',
                 'group' => 'company_details',
                 'label' => 'Company Phone'
             ],
             [
                 'key' => 'company_address',
-                'value' => '17 Valencia St., Susana Heights Subd.,
-Tunasan Muntinlupa City,
-Philippines 1774',
+                'value' => '#17 Valencia St., Susana Heights Subd., Tunasan, Muntinlupa City, Philippines 1774',
                 'type' => 'textarea',
                 'group' => 'company_details',
                 'label' => 'Company Address'

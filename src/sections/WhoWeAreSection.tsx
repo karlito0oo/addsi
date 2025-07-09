@@ -93,7 +93,7 @@ export default function WhoWeAreSection() {
             src={`${STORAGE_URL}/${whoWeAreSettings.who_we_are_image}`}
             alt="Who We Are" 
             className="w-full object-cover rounded-xl" 
-            style={{minHeight:'220px', maxHeight:'320px'}} 
+            style={{height:'280px'}} 
           />
         </div>
         <motion.img 
@@ -103,7 +103,7 @@ export default function WhoWeAreSection() {
           transition={{ delay: 0.8, duration: 0.3 }}
           src="/images/shortLogo.png" 
           alt="Alpha Logo" 
-          className="absolute bottom-4 right-4 h-12 w-auto" 
+          className="absolute bottom-8 right-12 h-12 w-auto" 
         />
       </motion.div>
     </motion.section>
