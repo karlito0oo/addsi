@@ -185,9 +185,10 @@ const CompanyDetails = React.memo(({ companyDetails }: { companyDetails: any }) 
         </div>
         <div>
           <p className="text-sm font-medium text-gray-900">Address</p>
-          <p className="text-base text-gray-600 whitespace-pre-wrap">
-            {companyDetails.company_address}
-          </p>
+          <p
+            className="text-base text-gray-600 whitespace-pre-wrap"
+            dangerouslySetInnerHTML={{ __html: companyDetails.company_address }}
+          />
         </div>
       </motion.div>
     </div>
