@@ -19,6 +19,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = User::where('email', $request->email)->first();
+            
+            // Update last login timestamp
+            $user->update([
+                'last_login_at' => now()
+            ]);
+            
             $token = $user->createToken('auth-token')->plainTextToken;
 
             return response()->json([

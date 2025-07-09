@@ -15,6 +15,7 @@ import WastoAchievementsManagement from './pages/admin/WastoAchievementsManageme
 import WastoProductsManagement from './pages/admin/WastoProductsManagement';
 import SettingsManagement from './pages/admin/SettingsManagement';
 import { PublicDataProvider } from './contexts/PublicDataContext';
+import AdminManagement from './pages/admin/AdminManagement';
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -94,6 +95,7 @@ function App() {
           }
         >
           <Route index element={<Navigate to="/admin/team" replace />} />
+          <Route path="admins" element={<AdminManagement />} />
           <Route path="team" element={<TeamManagement />} />
             <Route path="partners" element={<PartnersManagement />} />
           <Route path="services" element={<div>Services Management</div>} />

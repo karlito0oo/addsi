@@ -25,6 +25,7 @@ const AdminLayout: React.FC = () => {
   };
 
   const menuItems = [
+    { label: 'Administrators', path: '/admin/admins', icon: '👤' },
     { label: 'Our Team', path: '/admin/team', icon: '👥' },
     { label: 'Partners and Affiliations', path: '/admin/partners', icon: '🤝' },
     //{ label: 'Our Services', path: '/admin/services', icon: '⚡' },

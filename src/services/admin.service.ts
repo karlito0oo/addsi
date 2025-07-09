@@ -1,6 +1,51 @@
 import { api } from './api';
 
+export interface AdminCreateData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  role: string;
+  is_active: boolean;
+}
+
+export interface AdminUpdateData {
+  name: string;
+  email: string;
+  role: string;
+  is_active: boolean;
+}
+
+export interface PasswordChangeData {
+  current_password?: string;
+  password: string;
+  password_confirmation: string;
+  self: boolean;
+}
+
 class AdminService {
+  // Admin Management
+  async getAdmins() {
+    return api.get('/admins');
+  }
+
+  async createAdmin(data: AdminCreateData) {
+    return api.post('/admins', data);
+  }
+
+  async updateAdmin(id: number, data: AdminUpdateData) {
+    return api.put(`/admins/${id}`, data);
+  }
+
+  async deleteAdmin(id: number) {
+    return api.delete(`/admins/${id}`);
+  }
+
+  async changePassword(id: number, data: PasswordChangeData) {
+    return api.post(`/admins/${id}/change-password`, data);
+  }
+
+  // Team Members
   async getTeamMembers() {
     return api.get('/team-members');
   }
@@ -25,6 +70,7 @@ class AdminService {
     return api.delete(`/team-members/${id}`);
   }
 
+  // Partners
   async getPartners() {
     return api.get('/partners');
   }

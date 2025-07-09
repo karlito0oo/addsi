@@ -10,6 +10,7 @@ use App\Http\Controllers\WastoProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PublicDataController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login']);
@@ -26,6 +27,15 @@ Route::post('/contact', [ContactController::class, 'sendMessage']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
+    // Admin management
+    Route::prefix('admins')->group(function () {
+        Route::get('/', [AdminController::class, 'index']);
+        Route::post('/', [AdminController::class, 'store']);
+        Route::put('/{admin}', [AdminController::class, 'update']);
+        Route::delete('/{admin}', [AdminController::class, 'destroy']);
+        Route::post('/{admin}/change-password', [AdminController::class, 'changePassword']);
+    });
+
     // Team member management
     Route::post('/team-members', [TeamMemberController::class, 'store']);
     Route::post('/team-members/{teamMember}', [TeamMemberController::class, 'update']);
