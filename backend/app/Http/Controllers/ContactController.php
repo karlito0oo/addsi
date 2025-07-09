@@ -30,8 +30,8 @@ class ContactController extends Controller
                 'subject' => $request->subject,
                 'messageContent' => $request->message
             ], function ($message) use ($request) {
-                $message->from($request->email, $request->name);
-                $message->to(config('mail.from.address'), config('mail.from.name'));
+                $message->from(config('mail.from.address'), config('mail.from.name'));
+                $message->to(env('MAIL_INQUIRY_SEND_ADDRESS'), config('mail.from.name'));
                 $message->subject("Contact Form: {$request->subject}");
             });
 
@@ -49,7 +49,8 @@ class ContactController extends Controller
 
             return response()->json(['message' => 'Message sent successfully']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to send message'], 500);
+            
+            return response()->json(['error' => 'Failed to send message', 'exact_error' => $e], 500);
         }
     }
 } 
